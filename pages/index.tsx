@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Head from 'next/head';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const projects = [
   {
@@ -58,6 +59,7 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const tableRef = useRef<HTMLTableElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -207,10 +209,11 @@ export default function Home() {
                 {projects.map((project) => (
                   <tr
                     key={project.id}
-                    className="group border-t border-black/10 hover:bg-gray-50/50 transition-all duration-300"
+                    className="group border-t border-black/10 hover:bg-gray-50/50 transition-all duration-300 cursor-pointer"
                     onMouseEnter={() => !isMobile && setHoveredProject(project.id)}
                     onMouseLeave={() => !isMobile && setHoveredProject(null)}
                     onMouseMove={handleMouseMove}
+                    onClick={() => router.push(`/projects/${project.id}`)}
                   >
                     <td className="py-8 pr-4 w-16 sm:w-24 transition-all duration-300 align-top">
                       <span className="text-sm tracking-wide transition-all duration-300 font-light">{project.number}</span>
