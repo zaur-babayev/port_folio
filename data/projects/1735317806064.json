@@ -3,8 +3,8 @@
   "number": "001",
   "title": "Test",
   "year": "2024",
-  "category": "",
-  "image": "",
+  "category": "Product",
+  "image": "/projects/1735317806064/gallery/1735320187763.jpg",
   "description": "",
   "details": {
     "location": "",
@@ -15,5 +15,9 @@
     "architect": "Zaur Baba"
   },
   "sections": [],
-  "images": []
+  "images": [],
+  "nextProject": {
+    "id": "1735317812160",
+    "title": "Testing another"
+  }
 }

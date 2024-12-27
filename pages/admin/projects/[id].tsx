@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import ImageUpload from '../../../components/ImageUpload';
 import { projects } from '../../../data/projects';
-import { Project } from '../../../data/types';
+import { Project, ProjectCategory } from '../../../data/types';
 
 const emptyProject: Project = {
   id: '',
@@ -132,18 +132,32 @@ export default function EditProject() {
                 placeholder="Project Title"
                 className="px-4 py-2 border rounded"
               />
-              <input
-                type="text"
-                value={project.category}
-                onChange={(e) => setProject({ ...project, category: e.target.value })}
-                placeholder="Category"
-                className="px-4 py-2 border rounded"
-              />
+              <div className="mb-6">
+                <label className="block mb-2 text-sm">Category</label>
+                <select
+                  value={project.category}
+                  onChange={(e) => setProject({ ...project, category: e.target.value as ProjectCategory })}
+                  className="w-full p-2 border rounded"
+                >
+                  {Object.values(ProjectCategory).filter(cat => cat !== 'All').map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <input
                 type="text"
                 value={project.description}
                 onChange={(e) => setProject({ ...project, description: e.target.value })}
                 placeholder="Description"
+                className="px-4 py-2 border rounded"
+              />
+              <input
+                type="text"
+                value={project.year}
+                onChange={(e) => setProject({ ...project, year: e.target.value })}
+                placeholder="Year"
                 className="px-4 py-2 border rounded"
               />
               <input

@@ -108,6 +108,9 @@ export default function AdminPage() {
                 <p className="text-sm opacity-50 mb-1">#{project.number}</p>
                 <h2 className="text-xl mb-2">{project.title}</h2>
                 <p className="opacity-70">{project.description}</p>
+                <span className="inline-block mt-2 px-3 py-1 text-sm bg-gray-100 rounded">
+                  {project.category}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <button

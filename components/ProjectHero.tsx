@@ -17,9 +17,14 @@ export default function ProjectHero({ project }: ProjectHeroProps) {
       <div className="grid grid-cols-12 gap-8">
         {/* Project Info */}
         <div className="col-span-12 lg:col-span-4 mb-16 lg:mb-0">
-          <span className="text-sm tracking-wide opacity-50 block mb-4">#{project.number}</span>
-          <h1 className="text-4xl font-light mb-6">{project.title}</h1>
-          <p className="text-lg leading-relaxed opacity-70">{project.description}</p>
+          <div className="max-w-4xl">
+            <p className="text-sm opacity-50 mb-2">#{project.number}</p>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl mb-6">{project.title}</h1>
+            <p className="text-lg opacity-70 mb-4">{project.description}</p>
+            <span className="inline-block px-4 py-2 bg-gray-100 rounded-full text-sm">
+              {project.category}
+            </span>
+          </div>
         </div>
 
         {/* Hero Image */}

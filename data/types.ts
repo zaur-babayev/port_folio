@@ -20,17 +20,24 @@ export interface ProjectDetails {
   architect: string;
 }
 
+export enum ProjectCategory {
+  All = 'All',
+  Research = 'Research',
+  Product = 'Product',
+  Sensorial = 'Sensorial',
+  Exploration = 'Exploration',
+  Education = 'Education'
+}
+
 export interface Project {
   id: string;
   number: string;
   title: string;
-  year: string;
-  category: string;
-  image: string;
   description: string;
-  details: ProjectDetails;
-  sections: ProjectSection[];
+  category: ProjectCategory;
+  year: string;
   images: string[];
+  content: string;
   nextProject?: {
     id: string;
     title: string;
