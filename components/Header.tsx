@@ -1,26 +1,44 @@
 import Link from 'next/link';
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
 
-export default function Header() {
+const HamburgerIcon = dynamic(() => import('./HamburgerIcon'), { ssr: false });
+const Menu = dynamic(() => import('./Menu'), { ssr: false });
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <header className="fixed top-0 w-full bg-white/80 backdrop-blur-sm z-50 border-b border-gray-100">
-      <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
-        <nav className="flex items-center justify-between h-16">
-          <Link href="/" className="text-lg font-medium hover:text-gray-600 transition-colors">
-            Zaur Baba
-          </Link>
-          <div className="flex items-center space-x-8">
-            <Link href="/about" className="text-sm hover:text-gray-600 transition-colors">
-              About
+    <>
+      <header 
+        className={`fixed top-0 w-full backdrop-blur-sm z-[60] border-b transition-colors duration-300 ${
+          isMenuOpen 
+            ? 'bg-black border-white/10' 
+            : 'bg-white/80 border-gray-100'
+        }`}
+      >
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
+          <nav className="flex items-center justify-between h-16">
+            <Link 
+              href="/" 
+              className={`text-lg font-medium transition-colors ${
+                isMenuOpen 
+                  ? 'text-white hover:text-gray-300' 
+                  : 'text-black hover:text-gray-600'
+              }`}
+            >
+              Zaur Baba
             </Link>
-            <Link href="/projects" className="text-sm hover:text-gray-600 transition-colors">
-              Projects
-            </Link>
-            <Link href="/contact" className="text-sm hover:text-gray-600 transition-colors">
-              Contact
-            </Link>
-          </div>
-        </nav>
-      </div>
-    </header>
+            <div className="relative z-[70] flex items-center h-16">
+              <HamburgerIcon isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
+            </div>
+          </nav>
+        </div>
+      </header>
+      
+      <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+    </>
   );
-}
+};
+
+export default Header;
