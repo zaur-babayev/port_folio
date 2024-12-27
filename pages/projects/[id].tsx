@@ -3,8 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
-import { projects } from '../../data/projects';
+import { projects } from '../../data/projects/index';
 import Layout from '../../components/Layout';
+import ProjectImage from '../../components/ProjectImage';
 
 export default function ProjectDetail() {
   const router = useRouter();
@@ -82,12 +83,10 @@ export default function ProjectDetail() {
               section.image && (
                 <div key={`section-image-${index}`}>
                   <div className="relative aspect-[16/9]">
-                    <Image
+                    <ProjectImage
                       src={section.image}
                       alt={section.imageAlt || ''}
-                      layout="fill"
-                      objectFit="cover"
-                      className="transition-transform duration-500"
+                      priority={index === 0}
                     />
                   </div>
                   {section.imageCaption && (
@@ -99,16 +98,12 @@ export default function ProjectDetail() {
 
             {/* Gallery Images */}
             {project.images.map((image, index) => (
-              <div key={`gallery-image-${index}`}>
-                <div className="relative aspect-[16/9]">
-                  <Image
-                    src={image}
-                    alt={`${project.title} - Image ${index + 1}`}
-                    layout="fill"
-                    objectFit="cover"
-                    className="transition-transform duration-500"
-                  />
-                </div>
+              <div key={`gallery-image-${index}`} className="relative aspect-[16/9]">
+                <ProjectImage
+                  src={image}
+                  alt={`Project image ${index + 1}`}
+                  priority={index === 0}
+                />
               </div>
             ))}
           </div>

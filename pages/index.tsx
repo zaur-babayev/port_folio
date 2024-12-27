@@ -5,45 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Layout from '../components/Layout';
-
-const projects = [
-  {
-    id: 1,
-    number: '84',
-    title: 'Bocci Showroom Berlin',
-    year: '2023',
-    category: 'Architecture',
-    image: '/images/project1.jpg',
-    description: 'Former Courthouse, Berlin, Germany'
-  },
-  {
-    id: 2,
-    number: '100',
-    title: 'Surrey House',
-    year: '2023',
-    category: 'Architecture',
-    image: '/images/project2.jpg',
-    description: 'Surrey, Canada'
-  },
-  {
-    id: 3,
-    number: '96',
-    title: 'Polygon Gallery Chandelier',
-    year: '2022',
-    category: 'Objects',
-    image: '/images/project3.jpg',
-    description: 'North Vancouver, Canada'
-  },
-  {
-    id: 4,
-    number: '92',
-    title: 'Bocci Mexico City',
-    year: '2022',
-    category: 'Architecture',
-    image: '/images/project4.jpg',
-    description: 'Mexico City, Mexico'
-  },
-];
+import { projects } from '../data/projects/index';
 
 const filters = [
   { id: 'all', label: 'All' },
