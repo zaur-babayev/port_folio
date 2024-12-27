@@ -1,0 +1,70 @@
+{
+  "id": "1735324442184",
+  "number": "005",
+  "title": "Testlio Navigation Redesign",
+  "year": "2023",
+  "category": "Product",
+  "image": "/projects/1735324442184/gallery/1735324693083.png",
+  "description": "",
+  "details": {
+    "location": "Tallinn, Estonia",
+    "year": "2024",
+    "status": "Completed",
+    "area": "Product Designer / Project Lead",
+    "client": "Testlio",
+    "architect": "Zaur Babayev"
+  },
+  "sections": [
+    {
+      "title": "Overview",
+      "content": [
+        "In mid-2022 based on the feedback received from User Experience Center of Excellence, the latest navigation stack of Testlio platform lacked in multiple areas and didn't cater to the current goals of users. In this case study I will present solutions to the problems and findings uncovered by my team and final solution."
+      ],
+      "images": [],
+      "layout": "single"
+    },
+    {
+      "title": "Team",
+      "content": [
+        "Simmo Sedrik - Principal Designer\nMarharyta Milovanova - Product Designer\nMarko Kruustük - Chief Design Officer\nRenata Amatore - Director of UX & Usability CoE\nHelen Hendrikson - Research Manager"
+      ],
+      "images": [],
+      "layout": "single"
+    },
+    {
+      "title": "Signals",
+      "content": [
+        "Throughout my time at Testlio design team always knew that the navigation is something that will need attention at some point or another. Business realities however were always putting some other priorities for us. As time went we noticed more and more problems through these 3 main channels: shadowing sessions, indirect user feedback in Slack channels, UX Center of excellence report to Design team."
+      ],
+      "images": [],
+      "layout": "single"
+    },
+    {
+      "title": "Priority",
+      "content": [
+        "Redesigning navigation is a big task that requires a lot effort from designers as well as engineers. So how did we \"sold it\"? Short answer is that better navigation stack would save Testlio money.\nThis is how - almost all part of Testlio network is based on Freelance Coordinators and Freelance Testers. These log their hours up to a minute daily and get paid accordngly. So if we knew that current navigation is slowing our users down, by our humble internal calculations we figured that even slight decrease in time that users loose on navigation would save Testlio a lot of money. "
+      ],
+      "images": [],
+      "layout": "single"
+    },
+    {
+      "title": "Hypothesis 1: Lack of screen real estate",
+      "content": [
+        "Most of the work done on our platform is content heavy. It requires working with big chunks of text and data. Actions such as text editing, managing, dragging and dropping. In most cases users would like to concentrate on one task and have as much possible screen estate to execute it."
+      ],
+      "images": [
+        {
+          "src": "/projects/1735324442184/sections/1735325004956.png",
+          "alt": "Example page of Testlio navigation before the redesign",
+          "caption": "Example page of Testlio navigation before the redesign"
+        }
+      ],
+      "layout": "single"
+    }
+  ],
+  "images": [],
+  "previousProject": {
+    "id": "1735317897754",
+    "title": "Testing another one"
+  }
+}
