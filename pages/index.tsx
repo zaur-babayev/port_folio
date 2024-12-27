@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Layout from '../components/Layout';
 
 const projects = [
   {
@@ -52,12 +53,12 @@ const filters = [
 ];
 
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [activeFilter, setActiveFilter] = useState('all');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [activeFilter, setActiveFilter] = useState('all');
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const tableRef = useRef<HTMLTableElement>(null);
   const router = useRouter();
 
@@ -95,7 +96,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-light">
+    <Layout>
       <Head>
         <title>Zaur Baba | Digital Designer</title>
         <meta name="description" content="Digital product designer portfolio" />
@@ -180,10 +181,12 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main className={`pt-32 transition-all duration-500 transform ${
-        isMenuOpen ? 'opacity-0 pointer-events-none translate-y-4' : 'opacity-100 translate-y-0'
-      }`}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
         <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
           {/* Filters */}
           <div className="mb-16">
@@ -263,26 +266,26 @@ export default function Home() {
             </AnimatePresence>
           </div>
         </div>
-      </main>
 
-      {/* Footer */}
-      <footer className="py-16 sm:py-24 mt-16">
-        <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-8 sm:space-y-0">
-            <div className="space-y-4">
-              <p className="tracking-wide">Get in touch</p>
-              <a href="mailto:your@email.com" className="text-sm tracking-wide hover:opacity-50">
-                your@email.com
-              </a>
-            </div>
-            <div className="space-x-8 sm:space-x-12">
-              <a href="#" className="text-sm tracking-wide hover:opacity-50">LinkedIn</a>
-              <a href="#" className="text-sm tracking-wide hover:opacity-50">Twitter</a>
-              <a href="#" className="text-sm tracking-wide hover:opacity-50">Instagram</a>
+        {/* Footer */}
+        <footer className="py-16 sm:py-24 mt-16">
+          <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-8 sm:space-y-0">
+              <div className="space-y-4">
+                <p className="tracking-wide">Get in touch</p>
+                <a href="mailto:your@email.com" className="text-sm tracking-wide hover:opacity-50">
+                  your@email.com
+                </a>
+              </div>
+              <div className="space-x-8 sm:space-x-12">
+                <a href="#" className="text-sm tracking-wide hover:opacity-50">LinkedIn</a>
+                <a href="#" className="text-sm tracking-wide hover:opacity-50">Twitter</a>
+                <a href="#" className="text-sm tracking-wide hover:opacity-50">Instagram</a>
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </motion.div>
+    </Layout>
   );
 }
