@@ -98,8 +98,8 @@ export default function Home() {
       >
         <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
           {/* Filters */}
-          <div className="mb-16">
-            <div className="flex space-x-8 border-b border-black/10 pb-4 transition-all duration-300">
+          <div className="mb-8">
+            <div className="flex space-x-8 pb-4 transition-all duration-300">
               {filters.map(filter => (
                 <button
                   key={filter.id}
