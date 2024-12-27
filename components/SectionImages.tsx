@@ -7,7 +7,12 @@ interface SectionImagesProps {
 }
 
 export default function SectionImages({ images, layout = 'single' }: SectionImagesProps) {
-  if (!images || images.length === 0) return null;
+  console.log('SectionImages props:', { images, layout });
+  
+  if (!images || images.length === 0) {
+    console.log('No images provided');
+    return null;
+  }
 
   switch (layout) {
     case 'grid':

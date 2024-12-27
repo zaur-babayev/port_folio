@@ -1,9 +1,11 @@
 import { Project } from '../types';
 import { bocciShowroom } from './bocci-showroom';
+import { salvUxImprovements } from './salv-ux-improvements';
 
 // Add next/previous project references
 const allProjects: Project[] = [
   bocciShowroom,
+  salvUxImprovements
   // Add more projects here
 ];
 
