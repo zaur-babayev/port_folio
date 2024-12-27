@@ -1,12 +1,12 @@
 import { Project } from '../types';
 
-export const bocciShowroom: Project = {
+export const salvUxImprovements: Project = {
   id: 1,
-  number: "84",
-  title: "Bocci Showroom Berlinnn",
+  number: "106",
+  title: "Small Tweaks, Big Impact: UX Updates at Salv",
   year: "2023",
   category: "Architecture",
-  image: "/projects/bocci-showroom/cover.jpg",
+  image: "/projects/salv-ux-improvements/cover.jpg",
   description: "Former Courthouse, Berlin, Germany",
   details: {
     location: "Berlin, Germany",

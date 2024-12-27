@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { projects } from '../../data/projects/index';
 import Layout from '../../components/Layout';
 import ProjectImage from '../../components/ProjectImage';
+import SectionImages from '../../components/SectionImages';
 
 export default function ProjectDetail() {
   const router = useRouter();
@@ -80,32 +81,30 @@ export default function ProjectDetail() {
           <div className="space-y-24 mb-24">
             {/* Section Images */}
             {project.sections?.map((section, index) => (
-              section.image && (
-                <div key={`section-image-${index}`}>
-                  <div className="relative aspect-[16/9]">
-                    <ProjectImage
-                      src={section.image}
-                      alt={section.imageAlt || ''}
-                      priority={index === 0}
-                    />
-                  </div>
-                  {section.imageCaption && (
-                    <p className="text-sm tracking-wide opacity-50 mt-4">{section.imageCaption}</p>
-                  )}
-                </div>
-              )
+              <div key={`section-${index}`}>
+                {section.images && section.images.length > 0 && (
+                  <SectionImages 
+                    images={section.images} 
+                    layout={section.layout}
+                  />
+                )}
+              </div>
             ))}
 
             {/* Gallery Images */}
-            {project.images.map((image, index) => (
-              <div key={`gallery-image-${index}`} className="relative aspect-[16/9]">
-                <ProjectImage
-                  src={image}
-                  alt={`Project image ${index + 1}`}
-                  priority={index === 0}
-                />
+            {project.images.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {project.images.map((image, index) => (
+                  <div key={`gallery-image-${index}`} className="relative aspect-[4/3]">
+                    <ProjectImage
+                      src={image}
+                      alt={`${project.title} - Gallery image ${index + 1}`}
+                      priority={index === 0}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         </div>
 

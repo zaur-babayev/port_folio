@@ -1,9 +1,14 @@
+export interface ProjectImage {
+  src: string;
+  alt?: string;
+  caption?: string;
+}
+
 export interface ProjectSection {
   title?: string;
   content?: string[];
-  image?: string;
-  imageAlt?: string;
-  imageCaption?: string;
+  images?: ProjectImage[];
+  layout?: 'single' | 'grid' | 'fullwidth' | 'sideBySide';
 }
 
 export interface ProjectDetails {
