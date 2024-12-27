@@ -57,8 +57,6 @@ export default function Home() {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activeFilter, setActiveFilter] = useState('all');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const tableRef = useRef<HTMLTableElement>(null);
   const router = useRouter();
 
@@ -74,18 +72,6 @@ export default function Home() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  useEffect(() => {
-    if (isMenuOpen) {
-      setIsMenuVisible(true);
-    } else {
-      // Delay hiding the menu until after the fade out animation
-      const timer = setTimeout(() => {
-        setIsMenuVisible(false);
-      }, 300); // Match this with your transition duration
-      return () => clearTimeout(timer);
-    }
-  }, [isMenuOpen]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLTableRowElement>) => {
     if (!tableRef.current) return;
@@ -103,83 +89,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
       </Head>
-
-      {/* Menu Overlay */}
-      <div 
-        className={`fixed inset-0 bg-black transition-all duration-500 ease-in-out ${
-          isMenuOpen ? 'opacity-100' : 'opacity-0'
-        } ${isMenuVisible ? 'visible z-40' : 'invisible -z-10'}`}
-      >
-        <div className={`container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 transition-transform duration-500 ease-in-out transform ${
-          isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-        }`}>
-          <div className="pt-32 grid grid-cols-2 gap-24">
-            <div className="space-y-6">
-              <Link href="/about">
-                <span className="block text-[2.5rem] leading-tight font-light text-white hover:opacity-50 transition-opacity duration-300">About</span>
-              </Link>
-              <Link href="/contact">
-                <span className="block text-[2.5rem] leading-tight font-light text-white hover:opacity-50 transition-opacity duration-300">Contact</span>
-              </Link>
-            </div>
-            <div className="text-white space-y-8">
-              <p className="text-sm tracking-wide opacity-50 uppercase">About</p>
-              <div className="space-y-6">
-                <p className="text-base leading-relaxed font-light">
-                  Zaur Baba is a digital designer focused on creating meaningful experiences 
-                  through thoughtful design solutions. With a background in architecture 
-                  and interaction design, they bring a unique perspective to every project.
-                </p>
-                <p className="text-base leading-relaxed font-light">
-                  Based in Baku, Azerbaijan, they work with clients worldwide to create 
-                  innovative solutions that bridge the gap between form and function.
-                </p>
-                <div className="pt-8">
-                  <p className="text-sm tracking-wide opacity-50 uppercase mb-4">Contact</p>
-                  <a href="mailto:your@email.com" className="text-base hover:opacity-50 transition-opacity duration-300">
-                    your@email.com
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <nav className={`fixed w-full top-0 z-50 ${isMenuOpen ? 'mix-blend-difference' : ''}`}>
-        <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 py-8 flex justify-between items-center">
-          <Link href="/">
-            <span className={`text-lg tracking-wide transition-colors duration-300 ${
-              isMenuOpen ? 'text-white' : 'text-black'
-            } font-light`}>
-              Zaur Baba
-            </span>
-          </Link>
-          <div className="flex items-center">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="relative w-6 h-6 focus:outline-none"
-              aria-label={isMenuOpen ? 'Close Menu' : 'Open Menu'}
-            >
-              <span 
-                className={`absolute w-6 transform transition-all duration-300 ease-in-out hamburger-line ${
-                  isMenuOpen 
-                    ? 'rotate-45 translate-y-0 bg-white' 
-                    : 'translate-y-[-5px] bg-black'
-                }`}
-              />
-              <span 
-                className={`absolute w-6 transform transition-all duration-300 ease-in-out hamburger-line ${
-                  isMenuOpen 
-                    ? '-rotate-45 translate-y-0 bg-white' 
-                    : 'translate-y-[5px] bg-black'
-                }`}
-              />
-            </button>
-          </div>
-        </div>
-      </nav>
 
       <motion.div
         initial={{ opacity: 0 }}

@@ -22,35 +22,18 @@
 
 /* Layout Transitions */
 * {
-  transition-property: width, height, margin, padding, opacity, transform, background-color;
-  transition-duration: 500ms;
-  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  transition-property: opacity, transform;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .container {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  transition: padding 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: padding 300ms cubic-bezier(0.4, 0, 0.2, 1);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-
-/* Navigation */
-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Hamburger Menu */
-.hamburger-line {
-  height: 1.5px;
-  transform-origin: center;
-  left: 0;
-  right: 0;
-  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
-              background-color 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* Table Styles */
@@ -88,15 +71,10 @@ td {
   transition: background-color 500ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Blend Modes */
-.mix-blend-difference {
-  mix-blend-mode: difference;
-}
-
 /* Visibility */
 .invisible {
   visibility: hidden;
-  transition: visibility 0s linear 500ms;
+  transition: visibility 0s linear 300ms;
 }
 
 .visible {
