@@ -4,7 +4,7 @@ export default function Footer() {
   const currentYear = 2025;
   
   return (
-    <footer className="w-full py-12 mt-auto">
+    <footer className="w-full py-12 mt-auto font-medium">
       <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-6 sm:space-y-0">
           <div className="text-xs tracking-wide opacity-40">

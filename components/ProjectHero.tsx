@@ -12,7 +12,7 @@ export default function ProjectHero({ project }: ProjectHeroProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 mb-24"
+      className="container mx-auto px-6 py-40 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 mb-24"
     >
       <div className="grid grid-cols-12 gap-8">
         {/* Project Info */}

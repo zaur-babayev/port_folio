@@ -36,7 +36,7 @@ export default function Home() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 py-24">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 py-40">
           <div className="mb-12">
             {/* Filter Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8">
@@ -70,11 +70,8 @@ export default function Home() {
                       onMouseMove={handleMouseMove}
                       onClick={() => router.push(`/projects/${project.id}`)}
                     >
-                      <td className="hidden sm:table-cell py-8 pr-4 w-16 sm:w-24 transition-all duration-300 align-top">
-                        <span className="text-caption opacity-50">#{project.number}</span>
-                      </td>
                       <td className="py-8 pr-4 transition-all duration-300">
-                        <h3 className="mb-2">{project.title}</h3>
+                        <h4 className="mb-2">{project.title}</h4>
                         <p className="opacity-50">{project.description}</p>
                       </td>
                       <td className="py-8 pr-4 transition-all duration-300 align-top">
