@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white text-black;
+    font-feature-settings: "kern" 1, "liga" 1;
+    font-family: 'Inter', sans-serif;
+  }
+
+  table {
+    border-spacing: 0;
+    width: 100%;
+  }
+}
+
+/* Layout Transitions */
+* {
+  transition-property: width, height, margin, padding, opacity, transform, background-color;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  transition: padding 500ms cubic-bezier(0.23, 1, 0.32, 1);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Navigation */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hamburger Menu */
+.hamburger-line {
+  height: 1.5px;
+  transform-origin: center;
+  left: 0;
+  right: 0;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+              background-color 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Table Styles */
+tr {
+  cursor: pointer;
+  position: relative;
+}
+
+tr:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+td {
+  transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Text Styles */
+.text-lg, .text-xl, .text-2xl {
+  transition: font-size 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tracking-wide {
+  letter-spacing: 0.02em;
+  transition: letter-spacing 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Hover Effects */
+.hover\:opacity-50:hover {
+  opacity: 0.5;
+  transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.hover\:bg-gray-50:hover {
+  background-color: rgba(249, 250, 251, 0.5);
+  transition: background-color 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Blend Modes */
+.mix-blend-difference {
+  mix-blend-mode: difference;
+}
+
+/* Visibility */
+.invisible {
+  visibility: hidden;
+  transition: visibility 0s linear 500ms;
+}
+
+.visible {
+  visibility: visible;
+  transition: visibility 0s linear 0s;
+}
+
+/* Utilities */
+.pointer-events-none {
+  pointer-events: none;
+  user-select: none;
+}
+
+.relative {
+  position: relative;
+  overflow: visible;
+}
+
+/* Media Queries */
+@media (min-width: 640px) {
+  .container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    max-width: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+    max-width: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 6rem;
+    padding-right: 6rem;
+    max-width: 80rem; /* About 1280px - only applies from LG up */
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding-left: 8rem;
+    padding-right: 8rem;
+    max-width: 80rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    padding-left: 10rem;
+    padding-right: 10rem;
+    max-width: 80rem;
+  }
+}
