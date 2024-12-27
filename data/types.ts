@@ -21,7 +21,7 @@ export interface ProjectDetails {
 }
 
 export interface Project {
-  id: number;
+  id: string;
   number: string;
   title: string;
   year: string;
@@ -32,11 +32,11 @@ export interface Project {
   sections: ProjectSection[];
   images: string[];
   nextProject?: {
-    id: number;
+    id: string;
     title: string;
   };
   previousProject?: {
-    id: number;
+    id: string;
     title: string;
   };
 }

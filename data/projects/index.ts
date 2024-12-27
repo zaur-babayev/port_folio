@@ -1,27 +1,24 @@
 import { Project } from '../types';
-import { bocciShowroom } from './bocci-showroom';
-import { salvUxImprovements } from './salv-ux-improvements';
 
-// Add next/previous project references
-const allProjects: Project[] = [
-  bocciShowroom,
-  salvUxImprovements
-  // Add more projects here
+
+// Convert JSON to Project type
+
+// Export all projects
+export const projects: Project[] = [
 ];
 
 // Add next/previous project references
-export const projects: Project[] = allProjects.map((project, index) => ({
-  ...project,
-  nextProject: index < allProjects.length - 1 
-    ? { 
-        id: allProjects[index + 1].id,
-        title: allProjects[index + 1].title
-      }
-    : undefined,
-  previousProject: index > 0
-    ? {
-        id: allProjects[index - 1].id,
-        title: allProjects[index - 1].title
-      }
-    : undefined
-}));
+projects.forEach((project, index) => {
+  if (index < projects.length - 1) {
+    project.nextProject = {
+      id: projects[index + 1].id,
+      title: projects[index + 1].title
+    };
+  }
+  if (index > 0) {
+    project.previousProject = {
+      id: projects[index - 1].id,
+      title: projects[index - 1].title
+    };
+  }
+});
