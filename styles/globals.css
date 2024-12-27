@@ -1,17 +1,45 @@
+@import './fonts.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+}
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply bg-white text-black;
-    font-feature-settings: "kern" 1, "liga" 1;
-    font-family: 'Inter', sans-serif;
+    color: rgb(var(--foreground-rgb));
+    background: rgb(var(--background-rgb));
+    font-feature-settings: 'ss01' 1;
+    @apply text-base font-light leading-relaxed;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl font-light leading-tight tracking-tight;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl font-light leading-tight tracking-tight;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-light leading-snug tracking-tight;
+  }
+
+  p {
+    @apply text-base font-light leading-relaxed;
+  }
+
+  .text-caption {
+    @apply text-sm font-light tracking-wide;
   }
 
   table {

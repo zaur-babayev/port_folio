@@ -71,17 +71,17 @@ export default function Home() {
                       onClick={() => router.push(`/projects/${project.id}`)}
                     >
                       <td className="hidden sm:table-cell py-8 pr-4 w-16 sm:w-24 transition-all duration-300 align-top">
-                        <span className="text-sm tracking-wide transition-all duration-300 font-light">#{project.number}</span>
+                        <span className="text-caption opacity-50">#{project.number}</span>
                       </td>
                       <td className="py-8 pr-4 transition-all duration-300">
-                        <h3 className="text-xl tracking-wide transition-all duration-300 font-light mb-2">{project.title}</h3>
-                        <p className="text-sm tracking-wide opacity-50 font-light">{project.description}</p>
+                        <h3 className="mb-2">{project.title}</h3>
+                        <p className="opacity-50">{project.description}</p>
                       </td>
                       <td className="py-8 pr-4 transition-all duration-300 align-top">
-                        <span className="text-sm tracking-wide font-light">{project.category}</span>
+                        <span className="text-caption opacity-50">{project.category}</span>
                       </td>
                       <td className="py-8 text-right w-24 transition-all duration-300 align-top">
-                        <span className="text-sm tracking-wide font-light">{project.year}</span>
+                        <span className="text-caption opacity-50">{project.year}</span>
                       </td>
                     </tr>
                   ))}
