@@ -118,7 +118,7 @@ export default function EditProject() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-6 py-12">
+      <div className="container mx-auto px-6 py-24">
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             {error}

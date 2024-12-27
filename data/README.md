@@ -6,7 +6,7 @@
    ```
    public/
      projects/
-       project-name/
+       project-id/
          cover.jpg       # Main project image
          01.jpg         # Project detail images
          02.jpg
