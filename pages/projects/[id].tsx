@@ -1,22 +1,28 @@
 import { useRouter } from 'next/router';
-import { GetStaticProps, GetStaticPaths } from 'next';
+import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
-import { projects } from '../../data/projects';
 import { Project } from '../../data/types';
+import { projects } from '../../data/projects';
 import ProjectHero from '../../components/ProjectHero';
 import ProjectContent from '../../components/ProjectContent';
 import ProjectGallery from '../../components/ProjectGallery';
 import ProjectNavigation from '../../components/ProjectNavigation';
 
-interface ProjectPageProps {
-  project: Project | null;
-}
-
-export default function ProjectPage({ project }: ProjectPageProps) {
+export default function ProjectPage() {
   const router = useRouter();
+  const { id } = router.query;
+  const [project, setProject] = useState<Project | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Handle fallback state
-  if (router.isFallback) {
+  useEffect(() => {
+    if (!id) return;
+    
+    const currentProject = projects.find(p => p.id === id);
+    setProject(currentProject || null);
+    setIsLoading(false);
+  }, [id]);
+
+  if (isLoading) {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center">
@@ -26,7 +32,6 @@ export default function ProjectPage({ project }: ProjectPageProps) {
     );
   }
 
-  // Handle 404
   if (!project) {
     return (
       <Layout>
@@ -49,26 +54,3 @@ export default function ProjectPage({ project }: ProjectPageProps) {
     </Layout>
   );
 }
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  // Get paths for all projects
-  const paths = projects.map((project) => ({
-    params: { id: project.id.toString() }
-  }));
-
-  return {
-    paths,
-    fallback: false // Return 404 for unknown paths
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const id = params?.id;
-  const project = projects.find(p => p.id === id) || null;
-
-  return {
-    props: {
-      project
-    }
-  };
-};

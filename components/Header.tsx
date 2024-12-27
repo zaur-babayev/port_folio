@@ -27,7 +27,7 @@ const Header = () => {
                   : 'text-black hover:text-gray-600'
               }`}
             >
-              Zaur Baba
+              Zaur Babayev
             </Link>
             <div className="relative z-[70] flex items-center h-16">
               <HamburgerIcon isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />

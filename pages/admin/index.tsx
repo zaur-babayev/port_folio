@@ -1,18 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
+import { Project } from '../../data/types';
 import { projects } from '../../data/projects';
 
-export default function AdminDashboard() {
+export default function AdminPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const password = localStorage.getItem('adminPassword');
+    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+    }
+    setIsLoading(false);
+  }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // In production, use a proper authentication system
     if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
       setIsAuthenticated(true);
+      localStorage.setItem('adminPassword', password);
     }
   };
 
@@ -32,16 +42,24 @@ export default function AdminDashboard() {
         throw new Error(data.error || 'Failed to delete project');
       }
 
-      // Show success message
-      alert('Project deleted successfully!');
-      
       // Refresh the page to show updated list
       window.location.reload();
+      alert('Project deleted successfully!');
     } catch (error) {
       console.error('Error deleting project:', error);
       alert(error instanceof Error ? error.message : 'Failed to delete project');
     }
   };
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <p className="text-xl opacity-50">Loading...</p>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -57,7 +75,7 @@ export default function AdminDashboard() {
             />
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-black text-white rounded"
+              className="w-full px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
             >
               Login
             </button>
@@ -69,18 +87,18 @@ export default function AdminDashboard() {
 
   return (
     <Layout>
-      <div className="container mx-auto px-6 py-12">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-light">Portfolio Admin</h1>
+      <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 py-24">
+        <div className="flex justify-between items-center mb-12">
+          <h1 className="text-3xl font-light">Admin Dashboard</h1>
           <button
             onClick={() => router.push('/admin/projects/new')}
-            className="px-4 py-2 bg-black text-white rounded"
+            className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
           >
             Add New Project
           </button>
         </div>
 
-        <div className="grid gap-6">
+        <div className="space-y-6">
           {projects.map((project) => (
             <div
               key={project.id}
