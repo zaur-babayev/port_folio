@@ -17,9 +17,14 @@
     "role": "Product Designer / Project Lead",
     "team": [
       {
-        "name": "Test",
-        "role": "Test",
-        "url": "https://tailwindcss.com/docs/padding"
+        "name": "Simmo Sedrik",
+        "role": "Simmo Sedrik",
+        "url": "Simmo Sedrik"
+      },
+      {
+        "name": "Simmo Sedrik",
+        "role": "Simmo Sedrik",
+        "url": "Simmo Sedrik"
       }
     ]
   },

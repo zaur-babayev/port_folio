@@ -28,9 +28,30 @@ export default function EditProject() {
   const { id } = router.query;
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [teamMembers, setTeamMembers] = useState<Array<{ name: string; role: string; url?: string }>>(
-    project?.details?.team || []
-  );
+  const [teamMembers, setTeamMembers] = useState<Array<{ name: string; role: string; url?: string }>>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchProject = async () => {
+      try {
+        const response = await fetch(`/api/projects/${id}`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch project: ${response.statusText}`);
+        }
+        const data = await response.json();
+        setProject(data);
+        setTeamMembers(data.details?.team || []);
+      } catch (error) {
+        console.error('Error fetching project:', error);
+        setError('Failed to fetch project');
+      }
+    };
+
+    fetchProject();
+  }, [id]);
 
   const addTeamMember = () => {
     setTeamMembers([...teamMembers, { name: '', role: '', url: '' }]);
@@ -46,56 +67,41 @@ export default function EditProject() {
     setTeamMembers(updatedTeamMembers);
   };
 
-  useEffect(() => {
-    if (!id) return;
-
-    if (id === 'new') {
-      const timestamp = Date.now();
-      setProject({
-        ...emptyProject,
-        id: timestamp.toString(),
-        number: String(projects.length + 1).padStart(3, '0'),
-      });
-    } else {
-      const existingProject = projects.find(p => p.id === id);
-      setProject(existingProject || null);
-    }
-  }, [id]);
-
-  const handleSave = async () => {
-    if (!project) return;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!project || !id) return;
 
     try {
       setIsLoading(true);
-      const response = await fetch('/api/projects/save', {
-        method: 'POST',
+      const updatedProject = {
+        ...project,
+        details: {
+          ...project.details,
+          team: teamMembers
+        }
+      };
+
+      const response = await fetch(`/api/projects/${id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...project,
-          details: {
-            ...project.details,
-            team: teamMembers
-          }
-        }),
+        body: JSON.stringify(updatedProject),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to save project');
+        throw new Error(`Failed to update project: ${response.statusText}`);
       }
 
-      // Show success message
-      alert('Project saved successfully!');
-      
-      // Redirect to admin page
-      router.push('/admin');
+      const data = await response.json();
+      setProject(data);
+      setIsLoading(false);
+      setSuccess('Project saved successfully!');
+      setError(null);
     } catch (error) {
-      console.error('Error saving project:', error);
-      alert(error instanceof Error ? error.message : 'Failed to save project');
-    } finally {
+      console.error('Error updating project:', error);
+      setError(error instanceof Error ? error.message : 'Failed to update project');
+      setSuccess(null);
       setIsLoading(false);
     }
   };
@@ -113,6 +119,16 @@ export default function EditProject() {
   return (
     <Layout>
       <div className="container mx-auto px-6 py-12">
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            {error}
+          </div>
+        )}
+        {success && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            {success}
+          </div>
+        )}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-light">
             {id === 'new' ? 'New Project' : 'Edit Project'}
@@ -125,7 +141,7 @@ export default function EditProject() {
               Cancel
             </button>
             <button
-              onClick={handleSave}
+              onClick={handleSubmit}
               className="px-4 py-2 bg-black text-white rounded"
             >
               Save Project
@@ -275,34 +291,44 @@ export default function EditProject() {
             </div>
             <div className="space-y-4">
               {teamMembers.map((member, index) => (
-                <div key={index} className="flex gap-4 items-start">
+                <div key={index} className="flex gap-4 items-start p-4 bg-white rounded-lg border">
                   <div className="flex-1 space-y-4">
-                    <input
-                      type="text"
-                      value={member.name}
-                      onChange={(e) => updateTeamMember(index, 'name', e.target.value)}
-                      placeholder="Name"
-                      className="w-full px-4 py-2 rounded-lg bg-neutral-100"
-                    />
-                    <input
-                      type="text"
-                      value={member.role}
-                      onChange={(e) => updateTeamMember(index, 'role', e.target.value)}
-                      placeholder="Role"
-                      className="w-full px-4 py-2 rounded-lg bg-neutral-100"
-                    />
-                    <input
-                      type="url"
-                      value={member.url || ''}
-                      onChange={(e) => updateTeamMember(index, 'url', e.target.value)}
-                      placeholder="Profile URL (optional)"
-                      className="w-full px-4 py-2 rounded-lg bg-neutral-100"
-                    />
+                    <div>
+                      <label className="block text-sm mb-1">Name</label>
+                      <input
+                        type="text"
+                        value={member.name}
+                        onChange={(e) => updateTeamMember(index, 'name', e.target.value)}
+                        placeholder="Name"
+                        className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm mb-1">Role</label>
+                      <input
+                        type="text"
+                        value={member.role}
+                        onChange={(e) => updateTeamMember(index, 'role', e.target.value)}
+                        placeholder="Role"
+                        className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm mb-1">Profile URL (optional)</label>
+                      <input
+                        type="url"
+                        value={member.url || ''}
+                        onChange={(e) => updateTeamMember(index, 'url', e.target.value)}
+                        placeholder="https://linkedin.com/in/username"
+                        className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                      />
+                    </div>
                   </div>
                   <button
                     type="button"
                     onClick={() => removeTeamMember(index)}
                     className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                    title="Remove team member"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
