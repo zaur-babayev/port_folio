@@ -2,17 +2,26 @@
   "id": "1735324442184",
   "number": "005",
   "title": "Testlio Navigation Redesign",
-  "year": "2023",
   "category": "Product",
-  "image": "/projects/1735324442184/gallery/1735324693083.png",
+  "image": "/projects/1735324442184/gallery/1735338907987.jpg",
   "description": "",
+  "featured": {
+    "url": "https://medium.com/design-bootcamp/ux-case-study-maarifli-digital-learning-platform-838e714935ad",
+    "platform": "Medium",
+    "publication": "Design Bootcamp",
+    "type": "Case Study",
+    "label": "Published in"
+  },
   "details": {
-    "location": "Tallinn, Estonia",
-    "year": "2024",
-    "status": "Completed",
-    "area": "Product Designer / Project Lead",
-    "client": "Testlio",
-    "architect": "Zaur Babayev"
+    "year": "2023",
+    "role": "Product Designer / Project Lead",
+    "team": [
+      {
+        "name": "Test",
+        "role": "Test",
+        "url": "https://tailwindcss.com/docs/padding"
+      }
+    ]
   },
   "sections": [
     {
@@ -65,7 +74,7 @@
   "images": [],
   "previousProject": {
     "id": "1735317897754",
-    "title": "Testing another one"
+    "title": "Enhancing Digital Empathy in Teletherapy for Deeper Emotional Understanding, Estonian Academy of Arts"
   },
   "nextProject": {
     "id": "1735325292455",

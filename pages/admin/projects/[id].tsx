@@ -14,15 +14,13 @@ const emptyProject: Project = {
   image: '',
   description: '',
   details: {
-    location: '',
     year: new Date().getFullYear().toString(),
-    status: 'In Progress',
-    area: '',
-    client: '',
-    architect: 'Zaur Baba'
+    role: '',
+    team: []
   },
   sections: [],
-  images: []
+  images: [],
+  featured: null
 };
 
 export default function EditProject() {
@@ -30,6 +28,23 @@ export default function EditProject() {
   const { id } = router.query;
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [teamMembers, setTeamMembers] = useState<Array<{ name: string; role: string; url?: string }>>(
+    project?.details?.team || []
+  );
+
+  const addTeamMember = () => {
+    setTeamMembers([...teamMembers, { name: '', role: '', url: '' }]);
+  };
+
+  const removeTeamMember = (index: number) => {
+    setTeamMembers(teamMembers.filter((_, i) => i !== index));
+  };
+
+  const updateTeamMember = (index: number, field: 'name' | 'role' | 'url', value: string) => {
+    const updatedTeamMembers = [...teamMembers];
+    updatedTeamMembers[index] = { ...updatedTeamMembers[index], [field]: value };
+    setTeamMembers(updatedTeamMembers);
+  };
 
   useEffect(() => {
     if (!id) return;
@@ -57,7 +72,13 @@ export default function EditProject() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(project),
+        body: JSON.stringify({
+          ...project,
+          details: {
+            ...project.details,
+            team: teamMembers
+          }
+        }),
       });
 
       const data = await response.json();
@@ -150,43 +171,172 @@ export default function EditProject() {
                 type="text"
                 value={project.description}
                 onChange={(e) => setProject({ ...project, description: e.target.value })}
-                placeholder="Description"
-                className="px-4 py-2 border rounded"
-              />
-              <input
-                type="text"
-                value={project.year}
-                onChange={(e) => setProject({ ...project, year: e.target.value })}
-                placeholder="Year"
-                className="px-4 py-2 border rounded"
-              />
-              <input
-                type="text"
-                value={project.year}
-                onChange={(e) => setProject({ ...project, year: e.target.value })}
-                placeholder="Year"
-                className="px-4 py-2 border rounded"
+                placeholder="Project Description"
+                className="px-4 py-2 border rounded md:col-span-2"
               />
             </div>
           </section>
 
-          {/* Details */}
+          {/* Featured Publication */}
+          <section className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-light">Featured Publication</h2>
+              <button
+                onClick={() => {
+                  if (project.featured) {
+                    const { featured, ...rest } = project;
+                    setProject(rest);
+                  } else {
+                    setProject({
+                      ...project,
+                      featured: {
+                        url: '',
+                        platform: '',
+                        publication: '',
+                        type: '',
+                        label: 'Published in'
+                      }
+                    });
+                  }
+                }}
+                className="text-sm px-3 py-1.5 border rounded hover:bg-black hover:text-white transition-colors"
+              >
+                {project.featured ? 'Remove Featured' : 'Add Featured'}
+              </button>
+            </div>
+            
+            {project.featured && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input
+                  type="url"
+                  value={project.featured.url}
+                  onChange={(e) => setProject({
+                    ...project,
+                    featured: { ...project.featured!, url: e.target.value }
+                  })}
+                  placeholder="Publication URL"
+                  className="px-4 py-2 border rounded md:col-span-2"
+                />
+                <input
+                  type="text"
+                  value={project.featured.platform}
+                  onChange={(e) => setProject({
+                    ...project,
+                    featured: { ...project.featured!, platform: e.target.value }
+                  })}
+                  placeholder="Platform (e.g., Medium)"
+                  className="px-4 py-2 border rounded"
+                />
+                <input
+                  type="text"
+                  value={project.featured.publication}
+                  onChange={(e) => setProject({
+                    ...project,
+                    featured: { ...project.featured!, publication: e.target.value }
+                  })}
+                  placeholder="Publication Name (e.g., Design Bootcamp)"
+                  className="px-4 py-2 border rounded"
+                />
+                <input
+                  type="text"
+                  value={project.featured.type}
+                  onChange={(e) => setProject({
+                    ...project,
+                    featured: { ...project.featured!, type: e.target.value }
+                  })}
+                  placeholder="Content Type (e.g., Case Study)"
+                  className="px-4 py-2 border rounded"
+                />
+                <input
+                  type="text"
+                  value={project.featured.label}
+                  onChange={(e) => setProject({
+                    ...project,
+                    featured: { ...project.featured!, label: e.target.value }
+                  })}
+                  placeholder="Label (e.g., Published in, Featured in)"
+                  className="px-4 py-2 border rounded"
+                />
+              </div>
+            )}
+          </section>
+
+          {/* Team Members */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-medium">Team Members</h3>
+              <button
+                type="button"
+                onClick={addTeamMember}
+                className="px-4 py-2 text-sm bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors"
+              >
+                Add Team Member
+              </button>
+            </div>
+            <div className="space-y-4">
+              {teamMembers.map((member, index) => (
+                <div key={index} className="flex gap-4 items-start">
+                  <div className="flex-1 space-y-4">
+                    <input
+                      type="text"
+                      value={member.name}
+                      onChange={(e) => updateTeamMember(index, 'name', e.target.value)}
+                      placeholder="Name"
+                      className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                    />
+                    <input
+                      type="text"
+                      value={member.role}
+                      onChange={(e) => updateTeamMember(index, 'role', e.target.value)}
+                      placeholder="Role"
+                      className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                    />
+                    <input
+                      type="url"
+                      value={member.url || ''}
+                      onChange={(e) => updateTeamMember(index, 'url', e.target.value)}
+                      placeholder="Profile URL (optional)"
+                      className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => removeTeamMember(index)}
+                    className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                  >
+                    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Project Details */}
           <section className="space-y-4">
             <h2 className="text-xl font-light">Project Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(project.details).map(([key, value]) => (
-                <input
-                  key={key}
-                  type="text"
-                  value={value}
-                  onChange={(e) => setProject({
-                    ...project,
-                    details: { ...project.details, [key]: e.target.value }
-                  })}
-                  placeholder={key.charAt(0).toUpperCase() + key.slice(1)}
-                  className="px-4 py-2 border rounded"
-                />
-              ))}
+              <input
+                type="text"
+                value={project.details.year}
+                onChange={(e) => setProject({
+                  ...project,
+                  details: { ...project.details, year: e.target.value }
+                })}
+                placeholder="Year"
+                className="px-4 py-2 border rounded"
+              />
+              <input
+                type="text"
+                value={project.details.role}
+                onChange={(e) => setProject({
+                  ...project,
+                  details: { ...project.details, role: e.target.value }
+                })}
+                placeholder="Role"
+                className="px-4 py-2 border rounded"
+              />
             </div>
           </section>
 

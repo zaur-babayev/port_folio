@@ -125,6 +125,45 @@ td {
   overflow: visible;
 }
 
+/* Project Hero Styles */
+.project-hero {
+  @apply pb-40;
+}
+
+.project-hero h1 {
+  @apply text-4xl md:text-5xl xl:text-6xl font-light leading-tight;
+}
+
+.project-hero p {
+  @apply text-lg leading-relaxed;
+}
+
+.project-hero .team-list {
+  @apply space-y-2;
+}
+
+.project-hero .team-list li {
+  @apply text-lg leading-relaxed;
+}
+
+.project-hero .meta-text {
+  @apply text-sm font-light tracking-wide opacity-50;
+}
+
+.project-hero .section-title {
+  @apply text-sm font-light tracking-wide uppercase opacity-40;
+}
+
+.project-hero .image-container {
+  width: 100%;
+}
+
+@media (min-width: 1536px) {
+  .project-hero .image-container {
+    @apply aspect-[21/9];
+  }
+}
+
 /* Media Queries */
 @media (min-width: 640px) {
   .container {

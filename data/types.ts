@@ -11,13 +11,24 @@ export interface ProjectSection {
   layout?: 'single' | 'grid' | 'fullwidth' | 'sideBySide';
 }
 
+export interface ProjectTeamMember {
+  name: string;
+  role: string;
+  url?: string;
+}
+
 export interface ProjectDetails {
-  location: string;
   year: string;
-  status: string;
-  area: string;
-  client: string;
-  architect: string;
+  role: string;
+  team?: ProjectTeamMember[];
+}
+
+export interface ProjectFeatured {
+  url: string;
+  platform: string;
+  publication: string;
+  type: string;
+  label: string;
 }
 
 export enum ProjectCategory {
@@ -35,9 +46,10 @@ export interface Project {
   title: string;
   description: string;
   category: ProjectCategory;
-  year: string;
   images: string[];
   content: string;
+  details: ProjectDetails;
+  featured?: ProjectFeatured;
   nextProject?: {
     id: string;
     title: string;
