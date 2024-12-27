@@ -1,9 +1,9 @@
 {
   "id": "1735317897754",
   "number": "004",
-  "title": "Testing another one",
+  "title": "Enhancing Digital Empathy in Teletherapy for Deeper Emotional Understanding, Estonian Academy of Arts",
   "year": "2024",
-  "category": "",
+  "category": "Research",
   "image": "",
   "description": "",
   "details": {
@@ -15,5 +15,13 @@
     "architect": "Zaur Baba"
   },
   "sections": [],
-  "images": []
+  "images": [],
+  "nextProject": {
+    "id": "1735324442184",
+    "title": "Testlio Navigation Redesign"
+  },
+  "previousProject": {
+    "id": "1735317830179",
+    "title": "Enhancing Intergenerational Mental Wellbeing: Embodied Play for Children and Their Remote Grandparents"
+  }
 }

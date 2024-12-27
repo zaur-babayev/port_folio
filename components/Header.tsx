@@ -25,9 +25,10 @@ const Header = () => {
                 isMenuOpen 
                   ? 'text-white hover:text-gray-300' 
                   : 'text-black hover:text-gray-600'
-              }`}
+              } flex flex-col`}
             >
-              Zaur Babayev
+              <span className="text-base tracking-tight">Zaur Babayev</span>
+              <span className="hidden sm:block text-xs tracking-wide opacity-40 mt-0.5">Product Designer & PhD Candidate</span>
             </Link>
             <div className="relative z-[70] flex items-center h-16">
               <HamburgerIcon isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />

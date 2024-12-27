@@ -6,6 +6,7 @@ import project1735317812160 from './1735317812160.json';
 import project1735317830179 from './1735317830179.json';
 import project1735317897754 from './1735317897754.json';
 import project1735324442184 from './1735324442184.json';
+import project1735325292455 from './1735325292455.json';
 
 // Convert to array and sort by ID (timestamp)
 export const projects: Project[] = [
@@ -14,6 +15,7 @@ export const projects: Project[] = [
   project1735317830179,
   project1735317897754,
   project1735324442184,
+  project1735325292455,
 ].sort((a, b) => Number(a.id) - Number(b.id));
 
 // Add next/previous project references

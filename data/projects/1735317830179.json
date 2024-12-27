@@ -1,9 +1,9 @@
 {
   "id": "1735317830179",
   "number": "003",
-  "title": "Testing third",
+  "title": "Enhancing Intergenerational Mental Wellbeing: Embodied Play for Children and Their Remote Grandparents",
   "year": "2024",
-  "category": "",
+  "category": "Research",
   "image": "",
   "description": "",
   "details": {
@@ -15,5 +15,13 @@
     "architect": "Zaur Baba"
   },
   "sections": [],
-  "images": []
+  "images": [],
+  "nextProject": {
+    "id": "1735317897754",
+    "title": "Enhancing Digital Empathy in Teletherapy for Deeper Emotional Understanding, Estonian Academy of Arts"
+  },
+  "previousProject": {
+    "id": "1735317812160",
+    "title": "Salv: Navigation Redesign"
+  }
 }

@@ -67,8 +67,16 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                   <div className="space-y-4">
                     <h2 className="text-xl font-light">About</h2>
                     <p className="text-gray-400 font-light leading-relaxed">
-                      Digital product designer with a focus on creating meaningful and functional experiences. 
-                      Based in Berlin, working globally on projects that bridge the gap between design and technology.
+                      I primarily design and make music. I can also code. A little.
+                      <br />
+                      <br />
+                      I'm good at pattern recognition and recall. As a huge geek who uses a lot of software and hardware, my curiosity drives me to research beyond my immediate interests. That said, most of the days I try not to reinvent the wheel.
+                      <br />
+                      <br />
+                      People tell me that I am easy to work with and a good collaborator. I build relationships and trust with colleagues, and we often have fun while building products together.
+                      <br />
+                      <br />
+                      I always try to do what's right rather than just what is easy, aspiring to be the person I hope to become.
                     </p>
                   </div>
 

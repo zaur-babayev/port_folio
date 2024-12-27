@@ -1,9 +1,9 @@
 {
   "id": "1735317812160",
   "number": "002",
-  "title": "Testing another",
+  "title": "Salv: Navigation Redesign",
   "year": "2024",
-  "category": "",
+  "category": "Product",
   "image": "",
   "description": "",
   "details": {
@@ -15,5 +15,13 @@
     "architect": "Zaur Baba"
   },
   "sections": [],
-  "images": []
+  "images": [],
+  "nextProject": {
+    "id": "1735317830179",
+    "title": "Enhancing Intergenerational Mental Wellbeing: Embodied Play for Children and Their Remote Grandparents"
+  },
+  "previousProject": {
+    "id": "1735317806064",
+    "title": "Salv: Screening Flows"
+  }
 }
