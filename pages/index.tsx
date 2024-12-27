@@ -46,7 +46,7 @@ export default function Home() {
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`text-sm uppercase tracking-wide hover:opacity-50 transition-all duration-300 font-light ${
+                      className={`text-sm uppercase tracking-wide hover:opacity-50 transition-all duration-300 font-normal ${
                         selectedCategory === category ? 'opacity-100' : 'opacity-50'
                       }`}
                     >
@@ -100,8 +100,8 @@ export default function Home() {
                     style={{
                       top: mousePosition.y,
                       left: mousePosition.x,
-                      width: '500px',
-                      height: '600px',
+                      width: '600px',
+                      height: '300px',
                       transform: 'translate(-50%, -50%)',
                       zIndex: 50
                     }}

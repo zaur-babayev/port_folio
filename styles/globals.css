@@ -31,7 +31,7 @@
   }
 
   h3 {
-    @apply text-xl md:text-2xl font-light leading-snug tracking-tight;
+    @apply text-xl md:text-xl font-light leading-snug tracking-tight;
   }
 
   p {
@@ -39,7 +39,7 @@
   }
 
   .text-caption {
-    @apply text-sm font-light tracking-wide;
+    @apply text-sm font-normal tracking-wide;
   }
 
   table {
