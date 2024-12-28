@@ -32,7 +32,7 @@
     {
       "title": "Overview",
       "content": [
-        "In mid-2022 based on the feedback received from User Experience Center of Excellence, the latest navigation stack of Testlio platform lacked in multiple areas and didn't cater to the current goals of users. In this case study I will present solutions to the problems and findings uncovered by my team and final solution."
+        "<p><strong>In mid-2022 based on the feedback</strong> received from <a href=\"https://www.are.na/\" rel=\"noopener noreferrer\" target=\"_blank\">User Experience Center</a> of Excellence, the latest navigation stack of Testlio platform lacked in multiple areas and didn't cater to the current goals of users. In this case study I will present solutions to the problems and findings uncovered by my team and final solution.</p><p><br></p><p>In mid-2022 based on the feedback received from <a href=\"https://www.are.na/\" rel=\"noopener noreferrer\" target=\"_blank\">User Experience Center</a> of Excellence, the latest navigation stack of Testlio platform lacked in multiple areas and didn't cater to the current goals of users. In this case study I will present solutions to the problems and findings uncovered by my team and final solution.</p>"
       ],
       "images": [],
       "layout": "single"
@@ -40,7 +40,7 @@
     {
       "title": "Team",
       "content": [
-        "Simmo Sedrik - Principal Designer\nMarharyta Milovanova - Product Designer\nMarko Kruustük - Chief Design Officer\nRenata Amatore - Director of UX & Usability CoE\nHelen Hendrikson - Research Manager"
+        "<p>Simmo Sedrik - Principal Designer Marharyta Milovanova - Product Designer Marko Kruustük - Chief Design Officer Renata Amatore - Director of UX &amp; Usability CoE Helen Hendrikson - Research Manager</p>"
       ],
       "images": [],
       "layout": "single"
@@ -48,7 +48,7 @@
     {
       "title": "Signals",
       "content": [
-        "Throughout my time at Testlio design team always knew that the navigation is something that will need attention at some point or another. Business realities however were always putting some other priorities for us. As time went we noticed more and more problems through these 3 main channels: shadowing sessions, indirect user feedback in Slack channels, UX Center of excellence report to Design team."
+        "<p>Throughout my time at Testlio design team always knew that the navigation is something that will need attention at some point or another. Business realities however were always putting some other priorities for us. As time went we noticed more and more problems through these 3 main channels: shadowing sessions, indirect user feedback in Slack channels, UX&nbsp;Center of excellence report to Design team.</p>"
       ],
       "images": [],
       "layout": "single"
@@ -56,7 +56,7 @@
     {
       "title": "Priority",
       "content": [
-        "Redesigning navigation is a big task that requires a lot effort from designers as well as engineers. So how did we \"sold it\"? Short answer is that better navigation stack would save Testlio money.\nThis is how - almost all part of Testlio network is based on Freelance Coordinators and Freelance Testers. These log their hours up to a minute daily and get paid accordngly. So if we knew that current navigation is slowing our users down, by our humble internal calculations we figured that even slight decrease in time that users loose on navigation would save Testlio a lot of money. "
+        "<p>Redesigning navigation is a big task that requires a lot effort from designers as well as engineers. So how did we \"sold it\"? Short answer is that better navigation stack would save Testlio money. This is how - almost all part of Testlio network is based on Freelance Coordinators and Freelance Testers. These log their hours up to a minute daily and get paid accordngly. So if we knew that current navigation is slowing our users down, by our humble internal calculations we figured that even slight decrease in time that users loose on navigation would save Testlio a lot of money.</p>"
       ],
       "images": [],
       "layout": "single"
@@ -64,7 +64,7 @@
     {
       "title": "Hypothesis 1: Lack of screen real estate",
       "content": [
-        "Most of the work done on our platform is content heavy. It requires working with big chunks of text and data. Actions such as text editing, managing, dragging and dropping. In most cases users would like to concentrate on one task and have as much possible screen estate to execute it."
+        "<p>Most of the work done on our platform is content heavy. It requires working with big chunks of text and data. Actions such as text editing, managing, dragging and dropping. In most cases users would like to concentrate on one task and have as much possible screen estate to execute it.</p>"
       ],
       "images": [
         {

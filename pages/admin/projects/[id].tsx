@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../../components/Layout';
 import ImageUpload from '../../../components/ImageUpload';
+import dynamic from 'next/dynamic';
+import 'react-quill/dist/quill.snow.css';
 import { projects } from '../../../data/projects';
 import { Project, ProjectCategory } from '../../../data/types';
 
@@ -22,6 +24,20 @@ const emptyProject: Project = {
   images: [],
   featured: null
 };
+
+const ReactQuill = dynamic(() => import('react-quill'), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>,
+});
+
+const modules = {
+  toolbar: [
+    ['bold', 'italic'],
+    ['link']
+  ]
+};
+
+const formats = ['bold', 'italic', 'link'];
 
 export default function EditProject() {
   const router = useRouter();
@@ -409,20 +425,21 @@ export default function EditProject() {
                   
                   <div className="space-y-2">
                     {section.content?.map((paragraph, pIndex) => (
-                      <textarea
-                        key={pIndex}
-                        value={paragraph}
-                        onChange={(e) => {
-                          const newSections = [...(project.sections || [])];
-                          if (newSections[sectionIndex].content) {
-                            newSections[sectionIndex].content[pIndex] = e.target.value;
-                          }
-                          setProject({ ...project, sections: newSections });
-                        }}
-                        placeholder="Paragraph content"
-                        className="w-full px-4 py-2 border rounded"
-                        rows={3}
-                      />
+                      <div key={pIndex} className="w-full">
+                        <ReactQuill
+                          value={paragraph}
+                          onChange={(value) => {
+                            const newSections = [...(project.sections || [])];
+                            if (newSections[sectionIndex].content) {
+                              newSections[sectionIndex].content[pIndex] = value;
+                            }
+                            setProject({ ...project, sections: newSections });
+                          }}
+                          modules={modules}
+                          formats={formats}
+                          className="h-32 mb-12"
+                        />
+                      </div>
                     ))}
                     <button
                       onClick={() => {

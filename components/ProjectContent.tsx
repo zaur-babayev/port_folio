@@ -15,8 +15,14 @@ export default function ProjectContent({ project }: ProjectContentProps) {
               <h2 className="text-2xl font-light mb-6">{section.title}</h2>
             )}
             {section.content && (
-              <div className="text-lg leading-relaxed opacity-70 mb-8">
-                {section.content}
+              <div className="text-lg leading-relaxed opacity-70 mb-8 project-content">
+                {section.content.map((paragraph, index) => (
+                  <div 
+                    key={index}
+                    dangerouslySetInnerHTML={{ __html: paragraph }}
+                    className="mb-4 last:mb-0"
+                  />
+                ))}
               </div>
             )}
             {section.images && section.images.length > 0 && (
