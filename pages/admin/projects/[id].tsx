@@ -32,12 +32,33 @@ const ReactQuill = dynamic(() => import('react-quill'), {
 
 const modules = {
   toolbar: [
-    ['bold', 'italic'],
-    ['link']
+    // Text styling
+    ['bold', 'italic', 'underline', 'strike'],
+    
+    // Lists
+    [{ 'list': 'bullet' }, { 'list': 'ordered' }],
+    
+    // Indentation
+    [{ 'indent': '-1' }, { 'indent': '+1' }],
+    
+    // Headers
+    [{ 'header': [1, 2, 3, false] }],
+    
+    // Text alignment
+    [{ 'align': [] }],
+    
+    // Links and clean formatting
+    ['link', 'clean']
   ]
 };
 
-const formats = ['bold', 'italic', 'link'];
+const formats = [
+  'bold', 'italic', 'underline', 'strike',
+  'list', 'bullet', 'indent',
+  'header',
+  'align',
+  'link'
+];
 
 export default function EditProject() {
   const router = useRouter();
