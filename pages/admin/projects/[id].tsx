@@ -9,7 +9,6 @@ import { Project, ProjectCategory } from '../../../data/types';
 
 const emptyProject: Project = {
   id: '',
-  number: '',
   title: '',
   year: new Date().getFullYear().toString(),
   category: '',
@@ -74,6 +73,11 @@ export default function EditProject() {
 
     const fetchProject = async () => {
       try {
+        if (id === 'new') {
+          setProject(emptyProject);
+          return;
+        }
+
         const response = await fetch(`/api/projects/${id}`);
         if (!response.ok) {
           throw new Error(`Failed to fetch project: ${response.statusText}`);
@@ -106,135 +110,185 @@ export default function EditProject() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!project || !id) return;
+    setError('');
+    setSuccess('');
+
+    if (!project) return;
 
     try {
-      setIsLoading(true);
-      const updatedProject = {
+      const projectToSave = {
         ...project,
+        id: id === 'new' ? Date.now().toString() : project.id,
         details: {
           ...project.details,
           team: teamMembers
         }
       };
 
-      const response = await fetch(`/api/projects/${id}`, {
-        method: 'PUT',
+      const response = await fetch('/api/projects/save', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedProject),
+        body: JSON.stringify(projectToSave),
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to update project: ${response.statusText}`);
+        const error = await response.text();
+        throw new Error(error || 'Failed to save project');
       }
 
-      const data = await response.json();
-      setProject(data);
-      setIsLoading(false);
-      setSuccess('Project saved successfully!');
-      setError(null);
-    } catch (error) {
-      console.error('Error updating project:', error);
-      setError(error instanceof Error ? error.message : 'Failed to update project');
-      setSuccess(null);
-      setIsLoading(false);
+      setSuccess('Project saved successfully');
+      
+      if (id === 'new') {
+        router.push('/admin/projects/' + projectToSave.id);
+      }
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   if (isLoading || !project) {
     return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen bg-white">
+        <div className="border-b">
+          <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
+            <div className="h-16 flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={() => router.push('/admin')}
+                  className="flex items-center text-sm text-gray-600 hover:text-gray-900"
+                >
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                  </svg>
+                  Back to Admin Panel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 py-12">
           Loading...
         </div>
-      </Layout>
+      </div>
     );
   }
 
   return (
-    <Layout>
-      <div className="container mx-auto px-6 py-24">
+    <div className="min-h-screen bg-white">
+      <div className="border-b">
+        <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
+          <div className="h-16 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={() => router.push('/admin')}
+                className="flex items-center text-sm text-gray-600 hover:text-gray-900"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Admin Panel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 py-12">
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center text-red-700">
+            <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
             {error}
           </div>
         )}
+        
         {success && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center text-green-700">
+            <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+            </svg>
             {success}
           </div>
         )}
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-light">
-            {id === 'new' ? 'New Project' : 'Edit Project'}
-          </h1>
-          <div className="space-x-4">
-            <button
-              onClick={() => router.push('/admin')}
-              className="px-4 py-2 border rounded hover:bg-black hover:text-white transition-colors"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleSubmit}
-              className="px-4 py-2 bg-black text-white rounded"
-            >
-              Save Project
-            </button>
-          </div>
-        </div>
 
-        <div className="space-y-8">
-          {/* Basic Info */}
-          <section className="space-y-4">
-            <h2 className="text-xl font-light">Basic Information</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="md:col-span-2">
-                <p className="text-sm opacity-50 mb-2">Cover Image</p>
+        <form onSubmit={handleSubmit} className="space-y-12">
+          {/* Header */}
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-light">{id === 'new' ? 'New Project' : 'Edit Project'}</h1>
+            <div className="flex items-center space-x-4">
+              <button
+                type="button"
+                onClick={() => router.push('/admin')}
+                className="px-4 py-2 border border-gray-300 rounded-md hover:border-gray-400 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
+              >
+                Save Project
+              </button>
+            </div>
+          </div>
+
+          {/* Project Details */}
+          <section className="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 className="text-xl font-light mb-6">Project Details</h2>
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm text-gray-500 mb-2">Cover Image</p>
                 <ImageUpload
                   projectId={project.id}
                   onUpload={(url) => setProject({ ...project, image: url })}
                   currentImage={project.image}
                 />
               </div>
-              <input
-                type="text"
-                value={project.title}
-                onChange={(e) => setProject({ ...project, title: e.target.value })}
-                placeholder="Project Title"
-                className="px-4 py-2 border rounded"
-              />
-              <div className="mb-6">
-                <label className="block mb-2 text-sm">Category</label>
-                <select
-                  value={project.category}
-                  onChange={(e) => setProject({ ...project, category: e.target.value as ProjectCategory })}
-                  className="w-full p-2 border rounded"
-                >
-                  {Object.values(ProjectCategory).filter(cat => cat !== 'All').map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input
+                  type="text"
+                  value={project.title}
+                  onChange={(e) => setProject({ ...project, title: e.target.value })}
+                  placeholder="Project Title"
+                  className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                />
+                <div>
+                  <select
+                    value={project.category}
+                    onChange={(e) => setProject({ ...project, category: e.target.value as ProjectCategory })}
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200 bg-white"
+                  >
+                    <option value="">Select Category</option>
+                    {Object.values(ProjectCategory).filter(cat => cat !== 'All').map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="md:col-span-2">
+                  <textarea
+                    value={project.description}
+                    onChange={(e) => setProject({ ...project, description: e.target.value })}
+                    placeholder="Project Description"
+                    rows={3}
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                  />
+                </div>
               </div>
-              <input
-                type="text"
-                value={project.description}
-                onChange={(e) => setProject({ ...project, description: e.target.value })}
-                placeholder="Project Description"
-                className="px-4 py-2 border rounded md:col-span-2"
-              />
             </div>
           </section>
 
           {/* Featured Publication */}
-          <section className="space-y-4">
-            <div className="flex items-center justify-between">
+          <section className="bg-white rounded-lg border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-light">Featured Publication</h2>
               <button
+                type="button"
                 onClick={() => {
                   if (project.featured) {
                     const { featured, ...rest } = project;
@@ -252,24 +306,26 @@ export default function EditProject() {
                     });
                   }
                 }}
-                className="text-sm px-3 py-1.5 border rounded hover:bg-black hover:text-white transition-colors"
+                className="px-4 py-2 border border-gray-300 rounded-md hover:border-gray-400 transition-colors"
               >
                 {project.featured ? 'Remove Featured' : 'Add Featured'}
               </button>
             </div>
             
             {project.featured && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="url"
-                  value={project.featured.url}
-                  onChange={(e) => setProject({
-                    ...project,
-                    featured: { ...project.featured!, url: e.target.value }
-                  })}
-                  placeholder="Publication URL"
-                  className="px-4 py-2 border rounded md:col-span-2"
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="md:col-span-2">
+                  <input
+                    type="url"
+                    value={project.featured.url}
+                    onChange={(e) => setProject({
+                      ...project,
+                      featured: { ...project.featured!, url: e.target.value }
+                    })}
+                    placeholder="Publication URL"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
+                  />
+                </div>
                 <input
                   type="text"
                   value={project.featured.platform}
@@ -278,7 +334,7 @@ export default function EditProject() {
                     featured: { ...project.featured!, platform: e.target.value }
                   })}
                   placeholder="Platform (e.g., Medium)"
-                  className="px-4 py-2 border rounded"
+                  className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
                 <input
                   type="text"
@@ -287,8 +343,8 @@ export default function EditProject() {
                     ...project,
                     featured: { ...project.featured!, publication: e.target.value }
                   })}
-                  placeholder="Publication Name (e.g., Design Bootcamp)"
-                  className="px-4 py-2 border rounded"
+                  placeholder="Publication Name"
+                  className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
                 <input
                   type="text"
@@ -298,7 +354,7 @@ export default function EditProject() {
                     featured: { ...project.featured!, type: e.target.value }
                   })}
                   placeholder="Content Type (e.g., Case Study)"
-                  className="px-4 py-2 border rounded"
+                  className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
                 <input
                   type="text"
@@ -307,26 +363,17 @@ export default function EditProject() {
                     ...project,
                     featured: { ...project.featured!, label: e.target.value }
                   })}
-                  placeholder="Label (e.g., Published in, Featured in)"
-                  className="px-4 py-2 border rounded"
+                  placeholder="Label (e.g., Published in)"
+                  className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                 />
               </div>
             )}
           </section>
 
           {/* Team Members */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">Team Members</h3>
-              <button
-                type="button"
-                onClick={addTeamMember}
-                className="px-4 py-2 text-sm bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors"
-              >
-                Add Team Member
-              </button>
-            </div>
-            <div className="space-y-4">
+          <section className="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 className="text-xl font-light mb-6">Team Members</h2>
+            <div className="space-y-6">
               {teamMembers.map((member, index) => (
                 <div key={index} className="flex gap-4 items-start p-4 bg-white rounded-lg border">
                   <div className="flex-1 space-y-4">
@@ -337,7 +384,7 @@ export default function EditProject() {
                         value={member.name}
                         onChange={(e) => updateTeamMember(index, 'name', e.target.value)}
                         placeholder="Name"
-                        className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                        className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                       />
                     </div>
                     <div>
@@ -347,7 +394,7 @@ export default function EditProject() {
                         value={member.role}
                         onChange={(e) => updateTeamMember(index, 'role', e.target.value)}
                         placeholder="Role"
-                        className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                        className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                       />
                     </div>
                     <div>
@@ -357,7 +404,7 @@ export default function EditProject() {
                         value={member.url || ''}
                         onChange={(e) => updateTeamMember(index, 'url', e.target.value)}
                         placeholder="https://linkedin.com/in/username"
-                        className="w-full px-4 py-2 rounded-lg bg-neutral-100"
+                        className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                       />
                     </div>
                   </div>
@@ -373,13 +420,20 @@ export default function EditProject() {
                   </button>
                 </div>
               ))}
+              <button
+                type="button"
+                onClick={addTeamMember}
+                className="text-sm underline opacity-50 hover:opacity-100"
+              >
+                Add Team Member
+              </button>
             </div>
-          </div>
+          </section>
 
           {/* Project Details */}
-          <section className="space-y-4">
-            <h2 className="text-xl font-light">Project Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <section className="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 className="text-xl font-light mb-6">Project Details</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
                 type="text"
                 value={project.details.year}
@@ -388,7 +442,7 @@ export default function EditProject() {
                   details: { ...project.details, year: e.target.value }
                 })}
                 placeholder="Year"
-                className="px-4 py-2 border rounded"
+                className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
               />
               <input
                 type="text"
@@ -398,34 +452,14 @@ export default function EditProject() {
                   details: { ...project.details, role: e.target.value }
                 })}
                 placeholder="Role"
-                className="px-4 py-2 border rounded"
+                className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
               />
             </div>
           </section>
 
           {/* Sections */}
-          <section className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-light">Sections</h2>
-              <button
-                onClick={() => setProject({
-                  ...project,
-                  sections: [
-                    ...(project.sections || []),
-                    {
-                      title: '',
-                      content: [''],
-                      images: [],
-                      layout: 'single'
-                    }
-                  ]
-                })}
-                className="px-4 py-2 border rounded hover:bg-black hover:text-white transition-colors"
-              >
-                Add Section
-              </button>
-            </div>
-            
+          <section className="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 className="text-xl font-light mb-6">Sections</h2>
             <div className="space-y-6">
               {project.sections?.map((section, sectionIndex) => (
                 <div key={sectionIndex} className="border p-6 rounded-lg space-y-4">
@@ -441,7 +475,7 @@ export default function EditProject() {
                       setProject({ ...project, sections: newSections });
                     }}
                     placeholder="Section Title"
-                    className="w-full px-4 py-2 border rounded"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                   />
                   
                   <div className="space-y-2">
@@ -488,7 +522,7 @@ export default function EditProject() {
                         };
                         setProject({ ...project, sections: newSections });
                       }}
-                      className="w-full px-4 py-2 border rounded"
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200 bg-white"
                     >
                       <option value="single">Single</option>
                       <option value="grid">Grid</option>
@@ -531,7 +565,7 @@ export default function EditProject() {
                               setProject({ ...project, sections: newSections });
                             }}
                             placeholder="Alt text"
-                            className="px-4 py-2 border rounded"
+                            className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                           />
                           <input
                             type="text"
@@ -547,7 +581,7 @@ export default function EditProject() {
                               setProject({ ...project, sections: newSections });
                             }}
                             placeholder="Caption"
-                            className="px-4 py-2 border rounded"
+                            className="px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
                           />
                         </div>
                       </div>
@@ -582,12 +616,29 @@ export default function EditProject() {
                   </button>
                 </div>
               ))}
+              <button
+                onClick={() => setProject({
+                  ...project,
+                  sections: [
+                    ...(project.sections || []),
+                    {
+                      title: '',
+                      content: [''],
+                      images: [],
+                      layout: 'single'
+                    }
+                  ]
+                })}
+                className="px-4 py-2 border border-gray-300 rounded-md hover:border-gray-400 transition-colors"
+              >
+                Add Section
+              </button>
             </div>
           </section>
 
           {/* Gallery Images */}
-          <section className="space-y-4">
-            <h2 className="text-xl font-light">Gallery Images</h2>
+          <section className="bg-white rounded-lg border border-gray-200 p-6">
+            <h2 className="text-xl font-light mb-6">Gallery Images</h2>
             <div className="grid grid-cols-1 gap-8">
               {project.images?.map((image, index) => (
                 <div key={index} className="space-y-4">
@@ -622,8 +673,8 @@ export default function EditProject() {
               </button>
             </div>
           </section>
-        </div>
+        </form>
       </div>
-    </Layout>
+    </div>
   );
 }
