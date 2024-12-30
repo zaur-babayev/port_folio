@@ -6,10 +6,18 @@ interface ProjectContentProps {
 }
 
 export default function ProjectContent({ project }: ProjectContentProps) {
+  // If there are no sections, create a default section from content
+  const sections = project.sections?.length ? project.sections : [
+    {
+      content: [project.content],
+      images: project.images?.map(src => ({ src }))
+    }
+  ];
+
   return (
     <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 mb-24">
       <div className="prose prose-lg max-w-none">
-        {project.sections?.map((section, index) => (
+        {sections.map((section, index) => (
           <div key={index} className="mb-16">
             {section.title && (
               <h2 className="text-2xl font-light mb-6">{section.title}</h2>

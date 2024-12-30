@@ -49,6 +49,7 @@ export interface Project {
   images: string[];
   content: string;
   details: ProjectDetails;
+  sections?: ProjectSection[];
   featured?: ProjectFeatured;
   nextProject?: {
     id: string;
