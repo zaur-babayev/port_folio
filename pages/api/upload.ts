@@ -33,7 +33,7 @@ export default async function handler(
       fs.mkdirSync(tempDir, { recursive: true });
     }
 
-    const { fields, files } = await new Promise((resolve, reject) => {
+    const { fields, files } = await new Promise<{ fields: any; files: any }>((resolve, reject) => {
       form.parse(req, (err, fields, files) => {
         if (err) reject(err);
         resolve({ fields, files });

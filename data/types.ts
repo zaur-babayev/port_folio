@@ -6,7 +6,7 @@ export interface ProjectImage {
 
 export interface ProjectSection {
   title?: string;
-  content?: string[];
+  content?: (string | { type: string; content: string })[];
   images?: ProjectImage[];
   layout?: 'single' | 'grid' | 'fullwidth' | 'sideBySide';
 }
@@ -19,7 +19,12 @@ export interface ProjectTeamMember {
 
 export interface ProjectDetails {
   year: string;
-  role: string;
+  role?: string;
+  status?: string;
+  location?: string;
+  area?: string;
+  client?: string;
+  architect?: string;
   team?: ProjectTeamMember[];
 }
 
@@ -42,13 +47,13 @@ export enum ProjectCategory {
 
 export interface Project {
   id: string;
-  number: string;
+  number?: string;
   title: string;
   description: string;
   category: ProjectCategory;
   images: string[];
   image?: string;
-  content: string;
+  content?: string;
   details: ProjectDetails;
   sections?: ProjectSection[];
   featured?: ProjectFeatured;

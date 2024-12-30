@@ -482,7 +482,7 @@ export default function EditProject() {
                     {section.content?.map((paragraph, pIndex) => (
                       <div key={pIndex} className="w-full">
                         <ReactQuill
-                          value={paragraph}
+                          value={typeof paragraph === 'string' ? paragraph : paragraph.content}
                           onChange={(value) => {
                             const newSections = [...(project.sections || [])];
                             if (newSections[sectionIndex].content) {
