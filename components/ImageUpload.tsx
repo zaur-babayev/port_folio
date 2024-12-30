@@ -6,9 +6,10 @@ interface ImageUploadProps {
   section?: string;
   onUpload: (url: string) => void;
   currentImage?: string;
+  className?: string;
 }
 
-export default function ImageUpload({ projectId, section, onUpload, currentImage }: ImageUploadProps) {
+export default function ImageUpload({ projectId, section, onUpload, currentImage, className }: ImageUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(currentImage);
   const [error, setError] = useState('');
@@ -58,7 +59,7 @@ export default function ImageUpload({ projectId, section, onUpload, currentImage
   };
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       <div 
         className={`relative aspect-video border-2 border-dashed rounded-lg overflow-hidden
           ${isUploading ? 'opacity-50' : ''} 
