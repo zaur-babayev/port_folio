@@ -36,17 +36,17 @@ export default function Home() {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 py-40">
-          <div className="mb-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 2xl:px-32 py-20 sm:py-40">
+          <div className="mb-8 sm:mb-12">
             {/* Filter Header */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8">
-              <div>
-                <div className="flex space-x-8">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-6 sm:mb-8">
+              <div className="w-full overflow-x-auto -mx-4 px-4 sm:w-auto sm:overflow-visible sm:pb-0 sm:mx-0 sm:px-0">
+                <div className="flex space-x-6 sm:space-x-8 min-w-max">
                   {Object.values(ProjectCategory).map((category) => (
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className={`text-sm uppercase tracking-wide hover:opacity-50 transition-all duration-300 font-normal ${
+                      className={`text-sm uppercase tracking-wide hover:opacity-50 transition-all duration-300 font-normal whitespace-nowrap ${
                         selectedCategory === category ? 'opacity-100' : 'opacity-50'
                       }`}
                     >
@@ -58,32 +58,30 @@ export default function Home() {
             </div>
 
             {/* Projects Table */}
-            <div className="relative">
-              <table ref={tableRef} className="w-full border-collapse">
-                <tbody>
-                  {filteredProjects.map((project, index) => (
-                    <tr
-                      key={project.id}
-                      className="group border-t border-black/10 hover:bg-gray-50/50 transition-all duration-300 cursor-pointer"
-                      onMouseEnter={() => !isMobile && setHoveredProject(index)}
-                      onMouseLeave={() => !isMobile && setHoveredProject(null)}
-                      onMouseMove={handleMouseMove}
-                      onClick={() => router.push(`/projects/${project.id}`)}
-                    >
-                      <td className="py-8 pr-4 transition-all duration-300">
-                        <h4 className="mb-2">{project.title}</h4>
-                        <p className="opacity-50">{project.description}</p>
-                      </td>
-                      <td className="py-8 pr-4 transition-all duration-300 align-top">
+            <div className="relative -mx-4 sm:mx-0">
+              <div className="w-full">
+                {filteredProjects.map((project, index) => (
+                  <div
+                    key={project.id}
+                    className="group border-t border-black/10 hover:bg-gray-50/50 transition-all duration-300 cursor-pointer px-4 sm:px-0"
+                    onMouseEnter={() => !isMobile && setHoveredProject(index)}
+                    onMouseLeave={() => !isMobile && setHoveredProject(null)}
+                    onMouseMove={handleMouseMove}
+                    onClick={() => router.push(`/projects/${project.id}`)}
+                  >
+                    <div className="flex flex-col sm:flex-row py-6 sm:py-8 gap-4">
+                      <div className="flex-grow">
+                        <h4 className="mb-2 text-lg sm:text-xl break-words">{project.title}</h4>
+                        <p className="opacity-50 text-sm sm:text-base">{project.description}</p>
+                      </div>
+                      <div className="flex justify-between items-start sm:w-48 sm:flex-shrink-0">
                         <span className="text-caption opacity-50">{project.category}</span>
-                      </td>
-                      <td className="py-8 text-right w-24 transition-all duration-300 align-top">
                         <span className="text-caption opacity-50">{project.details.year}</span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
               {/* Hover Image */}
               <AnimatePresence>
@@ -93,14 +91,14 @@ export default function Home() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.98 }}
                     transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-                    className="fixed pointer-events-none"
+                    className="fixed pointer-events-none hidden sm:block"
                     style={{
                       top: mousePosition.y,
                       left: mousePosition.x,
-                      width: '600px',
-                      height: '300px',
-                      transform: 'translate(-50%, -50%)',
-                      zIndex: 50
+                      width: '40vw',
+                      maxWidth: '600px',
+                      height: 'auto',
+                      transform: 'translate(-50%, -50%)'
                     }}
                   >
                     <div className="relative w-full h-full overflow-hidden">

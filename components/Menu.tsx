@@ -43,16 +43,16 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
           exit="closed"
           variants={menuVariants}
         >
-          <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 h-full">
-            <div className="flex flex-col md:flex-row h-full py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24 2xl:px-32 h-full overflow-y-auto">
+            <div className="flex flex-col h-full py-20 sm:py-24">
               {/* Left side - Categories */}
-              <div className="flex-1 mb-12 md:mb-0">
-                <nav className="space-y-6">
+              <div className="mb-12">
+                <nav className="space-y-4 sm:space-y-6">
                   {categories.map((category) => (
                     <Link
                       key={category.name}
                       href={category.href}
-                      className="block text-white text-3xl md:text-4xl font-light hover:text-gray-400 transition-colors"
+                      className="block text-white text-2xl sm:text-3xl md:text-4xl font-light hover:text-gray-400 transition-colors"
                       onClick={onClose}
                     >
                       {category.name}
@@ -62,11 +62,11 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
               </div>
 
               {/* Right side - Profile */}
-              <div className="flex-1 text-white">
-                <div className="max-w-md space-y-8">
-                  <div className="space-y-4">
-                    <h2 className="text-xl font-light">About</h2>
-                    <p className="text-gray-400 font-light leading-relaxed">
+              <div className="text-white">
+                <div className="space-y-8">
+                  <div className="space-y-3 sm:space-y-4">
+                    <h2 className="text-lg sm:text-xl font-light">About</h2>
+                    <p className="text-gray-400 font-light leading-relaxed text-sm sm:text-base">
                       I primarily design and make music. I can also code. A little.
                       <br />
                       <br />
@@ -80,16 +80,16 @@ const Menu = ({ isOpen, onClose }: MenuProps) => {
                     </p>
                   </div>
 
-                  <div className="space-y-4">
-                    <h2 className="text-xl font-light">Connect</h2>
-                    <div className="space-y-2">
-                      <a href="mailto:your@email.com" className="block text-gray-400 hover:text-white transition-colors">
+                  <div className="space-y-3 sm:space-y-4">
+                    <h2 className="text-lg sm:text-xl font-light">Connect</h2>
+                    <div className="space-y-4">
+                      <a href="mailto:your@email.com" className="block text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
                         your@email.com
                       </a>
-                      <div className="flex space-x-6">
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
-                        <a href="#" className="text-gray-400 hover:text-white transition-colors">Instagram</a>
+                      <div className="flex flex-wrap gap-4 sm:gap-6">
+                        <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">LinkedIn</a>
+                        <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Twitter</a>
+                        <a href="#" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">Instagram</a>
                       </div>
                     </div>
                   </div>
