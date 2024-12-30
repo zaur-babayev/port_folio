@@ -1,4 +1,4 @@
-import { Project } from '../data/types';
+import { Project, ProjectSection } from '../data/types';
 import SectionImages from './SectionImages';
 
 interface ProjectContentProps {
@@ -7,12 +7,12 @@ interface ProjectContentProps {
 
 export default function ProjectContent({ project }: ProjectContentProps) {
   // If there are no sections, create a default section from content
-  const sections = project.sections?.length ? project.sections : [
-    {
-      content: [project.content],
-      images: project.images?.map(src => ({ src }))
-    }
-  ];
+  const defaultSection: ProjectSection = {
+    content: project.content ? [project.content] : [],
+    images: project.images?.map(src => ({ src })) || []
+  };
+
+  const sections = project.sections?.length ? project.sections : [defaultSection];
 
   return (
     <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32 mb-24">
