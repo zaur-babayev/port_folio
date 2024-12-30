@@ -8,14 +8,7 @@ const nextConfig = {
   webpack: (config, { isServer }) => {
     return config;
   },
-  // Disable some features that might cause issues
-  swcMinify: false,
-  experimental: {
-    // Disable experimental features
-    esmExternals: false
-  },
-  // Required for Cloudflare Pages
-  output: 'standalone',
+  swcMinify: true, // Enable SWC minification for better performance
 }
 
 module.exports = nextConfig
