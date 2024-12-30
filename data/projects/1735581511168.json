@@ -26,7 +26,7 @@
       "layout": "single"
     },
     {
-      "title": "",
+      "title": "Feedback",
       "content": [
         "<p>Right away, I thought this is not going to be popular among average/advanced users. And boy, was I wrong. It wasn’t just unpopular people hated it.</p><p><br></p><p><em>Get ready for YouTube’s annoying new resolution selector. No one asked for extra steps in this process. </em><a href=\"https://www.androidpolice.com/2021/04/23/youtube-mobile-app-gets-more-exhaustive-video-quality-controls/\" rel=\"noopener noreferrer\" target=\"_blank\">Android Police</a></p><p><br></p><p>And more ranting <a href=\"https://www.youtube.com/watch?v=piASB9xOADs&amp;embeds_widget_referrer=https%3A%2F%2Fmedium.com%2F\" rel=\"noopener noreferrer\" target=\"_blank\">from Marques Brownlee</a>.</p>"
       ],
@@ -45,6 +45,64 @@
         "<p>You get the picture. I was hoping that this is just something YouTube rolled out partially as A/B testing. However, it’s been more than a month and we are still here talking about this update.</p><p><br></p><p>Edit from 2024: However, it’s been more than a few years and we are still here talking about this update.</p>"
       ],
       "images": [],
+      "layout": "single"
+    },
+    {
+      "title": "Let’s see how it works right now",
+      "content": [
+        "<p>Congratulations! You’ve just spent 12 seconds of your life just to see Thom Yorke’s face in better quality. I timed it, and it takes about 12 seconds for me and about 20 seconds for my parents (less tech-savvy people) to reach the manual quality selection menu.</p><p><br></p><p>However, YouTube offers us an alternative option on the very bottom of the quality selection menu. This selection only applies to the current video. For all videos, go to Settings &gt; Video Quality Preferences.</p>"
+      ],
+      "images": [
+        {
+          "src": "/projects/1735581511168/sections/1735582701530.webp",
+          "alt": "Process of changing video resolution manually on YouTube Android app as of 20 May 2021. Note: Same process on the iOS app.",
+          "caption": "Process of changing video resolution manually on YouTube Android app as of 20 May 2021. Note: Same process on the iOS app."
+        }
+      ],
+      "layout": "single"
+    },
+    {
+      "title": "Great! Let’s break down that Video Quality Preferences page",
+      "content": [
+        "<p>Imagine a scenario where <strong>the user wants to set an exact manual streaming resolution that will be set for all future videos.</strong> Unfortunately, there is no such option here. All the user can do at this stage is to choose Auto, Higher picture quality, or Data saver. Same options we saw on previous pages, minus Advanced option.</p>"
+      ],
+      "images": [
+        {
+          "src": "/projects/1735581511168/sections/1735582914410.webp",
+          "alt": "Process of changing video resolution manually on YouTube Android app as of 20 May 2021. Note: Same process on the iOS app.",
+          "caption": "Process of changing video resolution manually on YouTube Android app as of 20 May 2021. Note: Same process on the iOS app."
+        }
+      ],
+      "layout": "single"
+    },
+    {
+      "title": "What do these options even mean?",
+      "content": [
+        "<p>While the<strong> Auto </strong>option streams your videos according to your mobile network or wi-fi connection, higher picture and data saver options are not that simple.</p><p><br></p><p>By selecting <strong>Higher picture quality</strong>, you will force the app to play only high-quality video, regardless of how fast or slow your internet connection is. At least it is supposed to do so. What do we expect when we hear higher picture quality? 1080? Maybe 2k or God forbid 4k? Well, not with YouTube. According to the <a href=\"https://www.gsmarena.com/youtube_android_ios_mobile_app_new_video_resolution_settings-news-48821.php\" rel=\"noopener noreferrer\" target=\"_blank\">GSMARENA</a> report and my own experience, the video quality usually caps at 720p even with a great network connection.</p><p><br></p><p><strong>Data saver mode</strong> is supposed to reduce the resolution to be around 480p to save you some data on a mobile network. Guess what? <a href=\"https://www.gsmarena.com/youtube_android_ios_mobile_app_new_video_resolution_settings-news-48821.php\" rel=\"noopener noreferrer\" target=\"_blank\">It does not.</a> In my experience, this option is hit or miss. However, it functions a bit more logically than Higher picture quality. While it usually streams between 480p and 720p it can even drop lower if your connection is unstable.</p>"
+      ],
+      "images": [],
+      "layout": "single"
+    },
+    {
+      "title": "Putting everything into perspective",
+      "content": [
+        "<p>Of course, I understand where YouTube is coming from with this new update. They are trying to be more inclusive with these resolution options. The problem they are ideating around is essential, and I feel like they should have done this a while ago.</p><p><br></p><p><em>At least before I explained the difference between 1080 and 2k to my dad.</em></p><p><br></p><p>Maybe they are targeting not only the less tech-savvy people but the <a href=\"https://nextbillionusers.google/\" rel=\"noopener noreferrer\" target=\"_blank\">Next Billion Users</a> and people who are usually on the go and don’t care about the resolution that much. I understand that YouTube and Google have massive user data and reports that I do not have access to. However, solving a problem to include a group of users shouldn’t be coming at the cost of already existing ones.</p><p><br></p><p>This is what we are going to try to achieve in this case study. </p><p><strong>Make the YouTube video resolution interface simpler for all types of users.</strong></p><p><br></p><p><strong>Disclaimer:</strong> <em>I am sure YouTube has a great team of UX designers that work under massive pressure because of the responsibility they face with the product they work on. They might have their data and reasons to do this the way they did. This is just my little contribution from the outside.</em></p><p><br></p><p><em>This project was created by me for educational purposes and is not made, owned, or affiliated directly to YouTube. All the rights for YouTube trademark is owned by YouTube LLC.</em></p>"
+      ],
+      "images": [],
+      "layout": "single"
+    },
+    {
+      "title": "Pain points of the current setup",
+      "content": [
+        "<p>I came up with these six paint points by analyzing the feedback section of Google Play Store and AppStore.</p>"
+      ],
+      "images": [
+        {
+          "src": "/projects/1735581511168/sections/1735583340311.webp",
+          "alt": "Paint points",
+          "caption": "Paint points"
+        }
+      ],
       "layout": "single"
     }
   ],
