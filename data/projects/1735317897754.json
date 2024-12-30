@@ -12,9 +12,19 @@
     "status": "In Progress",
     "area": "",
     "client": "",
-    "architect": "Zaur Baba"
+    "architect": "Zaur Baba",
+    "team": []
   },
-  "sections": [],
+  "sections": [
+    {
+      "title": "",
+      "content": [
+        ""
+      ],
+      "images": [],
+      "layout": "single"
+    }
+  ],
   "images": [],
   "nextProject": {
     "id": "1735324442184",

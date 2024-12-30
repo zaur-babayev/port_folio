@@ -1,0 +1,59 @@
+{
+  "id": "1735581511168",
+  "title": "Youtube: Fixing The Interaction People Hated",
+  "year": "2024",
+  "category": "Product",
+  "image": "/projects/1735581511168/gallery/1735581518206.webp",
+  "description": "",
+  "details": {
+    "year": "2021",
+    "role": "Product Designer",
+    "team": []
+  },
+  "sections": [
+    {
+      "title": "Overview",
+      "content": [
+        "<p>A few years ago (even though the article says a few weeks ago, phew time flies...), I was browsing YouTube on my iPad, and suddenly noticed an odd change in interaction for the video resolution switch. Now you have to go through 4 clicks instead of 2 to change resolution.</p>"
+      ],
+      "images": [
+        {
+          "src": "/projects/1735581511168/sections/1735581698334.gif",
+          "alt": "MKBHD’s (Marques Brownlee) review on iPad Pro 2021",
+          "caption": "MKBHD’s (Marques Brownlee) review on iPad Pro 2021"
+        }
+      ],
+      "layout": "single"
+    },
+    {
+      "title": "",
+      "content": [
+        "<p>Right away, I thought this is not going to be popular among average/advanced users. And boy, was I wrong. It wasn’t just unpopular people hated it.</p><p><br></p><p><em>Get ready for YouTube’s annoying new resolution selector. No one asked for extra steps in this process. </em><a href=\"https://www.androidpolice.com/2021/04/23/youtube-mobile-app-gets-more-exhaustive-video-quality-controls/\" rel=\"noopener noreferrer\" target=\"_blank\">Android Police</a></p><p><br></p><p>And more ranting <a href=\"https://www.youtube.com/watch?v=piASB9xOADs&amp;embeds_widget_referrer=https%3A%2F%2Fmedium.com%2F\" rel=\"noopener noreferrer\" target=\"_blank\">from Marques Brownlee</a>.</p>"
+      ],
+      "images": [
+        {
+          "src": "/projects/1735581511168/sections/1735581904160.webp",
+          "alt": "Feedback section of YouTube Android App in Google Play Store",
+          "caption": "Feedback section of YouTube Android App in Google Play Store"
+        }
+      ],
+      "layout": "single"
+    },
+    {
+      "title": "",
+      "content": [
+        "<p>You get the picture. I was hoping that this is just something YouTube rolled out partially as A/B testing. However, it’s been more than a month and we are still here talking about this update.</p><p><br></p><p>Edit from 2024: However, it’s been more than a few years and we are still here talking about this update.</p>"
+      ],
+      "images": [],
+      "layout": "single"
+    }
+  ],
+  "images": [],
+  "featured": {
+    "url": "https://medium.com/design-bootcamp/youtube-b3ceb928871c",
+    "platform": "Medium",
+    "publication": "Bootcamp",
+    "type": "Case Study",
+    "label": "Published in"
+  }
+}

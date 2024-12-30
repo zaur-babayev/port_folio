@@ -81,7 +81,7 @@ export default function ImageUpload({ projectId, section, onUpload, currentImage
         
         <input
           type="file"
-          accept="image/*"
+          accept="image/jpeg,image/png,image/webp,image/gif"
           onChange={handleUpload}
           disabled={isUploading}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"

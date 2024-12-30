@@ -86,6 +86,11 @@ async function optimizeImage(filepath) {
     // Convert to appropriate format based on input
     if (metadata.format === 'png') {
       image.png({ quality: QUALITY });
+    } else if (metadata.format === 'webp') {
+      image.webp({ quality: QUALITY });
+    } else if (metadata.format === 'gif') {
+      // For GIFs, we'll maintain animation if present
+      image.gif();
     } else {
       image.jpeg({ quality: QUALITY });
     }
@@ -121,7 +126,7 @@ async function processNewImages() {
     
     // Find all image files
     spinner.text = 'Scanning for images...';
-    const files = await glob('**/*.{jpg,jpeg,png}', {
+    const files = await glob('**/*.{jpg,jpeg,png,webp,gif}', {
       cwd: PROJECTS_DIR,
       absolute: true
     });
