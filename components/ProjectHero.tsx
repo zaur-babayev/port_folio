@@ -2,32 +2,6 @@ import { Project } from '../data/types';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-interface Project {
-  title: string;
-  description: string;
-  image?: string;
-  category: string;
-  year: string;
-  role?: string;
-  timeline?: string;
-  client?: string;
-  featured?: {
-    url: string;
-    platform: string;
-    publication: string;
-    label?: string;
-  };
-  details: {
-    role?: string;
-    year?: string;
-    team?: {
-      name: string;
-      role: string;
-      url?: string;
-    }[];
-  };
-}
-
 interface ProjectHeroProps {
   project: Project;
 }
