@@ -9,11 +9,12 @@ import { Project, ProjectCategory } from '../../../data/types';
 
 const emptyProject: Project = {
   id: '',
+  number: '',
   title: '',
-  year: new Date().getFullYear().toString(),
-  category: '',
+  category: ProjectCategory.All,
   image: '',
   description: '',
+  content: '',
   details: {
     year: new Date().getFullYear().toString(),
     role: '',
@@ -21,7 +22,7 @@ const emptyProject: Project = {
   },
   sections: [],
   images: [],
-  featured: null
+  featured: undefined
 };
 
 const ReactQuill = dynamic(() => import('react-quill'), {
@@ -85,9 +86,8 @@ export default function EditProject() {
         const data = await response.json();
         setProject(data);
         setTeamMembers(data.details?.team || []);
-      } catch (error) {
-        console.error('Error fetching project:', error);
-        setError('Failed to fetch project');
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'An unknown error occurred');
       }
     };
 
@@ -143,8 +143,8 @@ export default function EditProject() {
       if (id === 'new') {
         router.push('/admin/projects/' + projectToSave.id);
       }
-    } catch (err) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An unknown error occurred');
     }
   };
 

@@ -78,7 +78,7 @@ export default function Home() {
                         <span className="text-caption opacity-50">{project.category}</span>
                       </td>
                       <td className="py-8 text-right w-24 transition-all duration-300 align-top">
-                        <span className="text-caption opacity-50">{project.year}</span>
+                        <span className="text-caption opacity-50">{project.details.year}</span>
                       </td>
                     </tr>
                   ))}

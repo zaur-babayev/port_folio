@@ -47,6 +47,7 @@ export interface Project {
   description: string;
   category: ProjectCategory;
   images: string[];
+  image?: string;
   content: string;
   details: ProjectDetails;
   sections?: ProjectSection[];

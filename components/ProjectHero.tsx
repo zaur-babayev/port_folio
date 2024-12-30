@@ -16,10 +16,10 @@ export default function ProjectHero({ project }: ProjectHeroProps) {
     >
       {/* Project Image */}
       <div className="w-full mb-24">
-        {project.image && (
+        {(project.image || (project.images && project.images[0])) && (
           <div className="relative w-full overflow-hidden">
             <Image
-              src={project.image}
+              src={project.image || project.images[0]}
               alt={project.title}
               width={1920}
               height={0}
