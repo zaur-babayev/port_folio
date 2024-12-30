@@ -43,12 +43,14 @@ export default function ProjectHero({ project }: ProjectHeroProps) {
       {/* Project Image */}
       <div className="w-full mb-24">
         {project.image && (
-          <div className="relative w-full aspect-[16/9] overflow-hidden">
+          <div className="relative w-full overflow-hidden">
             <Image
               src={project.image}
               alt={project.title}
-              fill
-              className="object-cover"
+              width={1920}
+              height={0}
+              style={{ height: 'auto', width: '100%' }}
+              className="object-contain"
               priority
             />
           </div>

@@ -27,7 +27,7 @@ export default function ProjectImage({ src, alt, priority = false, className = '
   }
 
   return (
-    <div className={`relative overflow-hidden w-full ${className}`} style={{ aspectRatio: '16/9' }}>
+    <div className={`relative overflow-hidden w-full ${className}`}>
       {/* Loading placeholder */}
       <AnimatePresence>
         {isLoading && (
@@ -46,13 +46,16 @@ export default function ProjectImage({ src, alt, priority = false, className = '
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
         transition={{ duration: 0.2 }}
-        className="relative h-full w-full"
+        className="relative w-full"
+        style={{ display: 'block' }}
       >
         <Image
           src={src}
           alt={alt}
-          fill
-          className="object-cover"
+          width={1920}
+          height={0}
+          style={{ height: 'auto', width: '100%' }}
+          className="object-contain"
           quality={90}
           priority={priority}
           onLoad={() => setIsLoading(false)}
