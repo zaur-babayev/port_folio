@@ -32,11 +32,11 @@ export default function ProjectHero({ project }: ProjectHeroProps) {
       </div>
 
       {/* Project Content */}
-      <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
+      <div className="container mx-auto px-4 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
         {/* Project Header */}
-        <div className="grid grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-12 gap-4 sm:gap-16 items-start">
           {/* Main Content */}
-          <div className="col-span-12 lg:col-span-7">
+          <div className="col-span-12 lg:col-span-7 min-w-0 w-full">
             {project.featured && (
               <a
                 href={project.featured.url}
@@ -74,7 +74,7 @@ export default function ProjectHero({ project }: ProjectHeroProps) {
               <span>•</span>
               <span>{project.details.year}</span>
             </div>
-            <h1 className="mb-6">{project.title}</h1>
+            <h1 className="mb-6 break-normal whitespace-normal text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight w-full">{project.title}</h1>
             <p className="text-lg opacity-70 max-w-2xl">{project.description}</p>
           </div>
 
