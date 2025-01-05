@@ -1,4 +1,4 @@
-import { Project } from '../types';
+import { Project, ProjectCategory } from '../types';
 
 // Import JSON files directly
 import project1735317806064 from './1735317806064.json';
@@ -10,16 +10,34 @@ import project1735325292455 from './1735325292455.json';
 import project1735345423275 from './1735345423275.json';
 import project1735581511168 from './1735581511168.json';
 
+function validateProject(project: any): Project {
+  // If category is empty or invalid, default to 'All'
+  const category = project.category || 'All';
+  
+  if (!Object.values(ProjectCategory).includes(category)) {
+    console.warn(`Invalid category "${category}" for project "${project.title}", defaulting to "All"`);
+    return {
+      ...project,
+      category: ProjectCategory.All
+    };
+  }
+  
+  return {
+    ...project,
+    category: ProjectCategory[category as keyof typeof ProjectCategory]
+  };
+}
+
 // Convert to array and sort by ID (timestamp)
 export const projects: Project[] = [
-  project1735317806064,
-  project1735317812160,
-  project1735317830179,
-  project1735317897754,
-  project1735324442184,
-  project1735325292455,
-  project1735345423275,
-  project1735581511168,
+  validateProject(project1735317806064),
+  validateProject(project1735317812160),
+  validateProject(project1735317830179),
+  validateProject(project1735317897754),
+  validateProject(project1735324442184),
+  validateProject(project1735325292455),
+  validateProject(project1735345423275),
+  validateProject(project1735581511168)
 ].sort((a, b) => Number(a.id) - Number(b.id));
 
 // Add next/previous project references
