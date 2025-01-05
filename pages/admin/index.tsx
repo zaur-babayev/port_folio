@@ -5,23 +5,16 @@ import { projects } from '../../data/projects';
 
 export default function AdminPage() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const password = localStorage.getItem('adminPassword');
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-    }
-    setIsLoading(false);
-  }, []);
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-      localStorage.setItem('adminPassword', password);
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+      });
+      router.push('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
     }
   };
 
@@ -58,41 +51,26 @@ export default function AdminPage() {
     );
   }
 
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <form onSubmit={handleLogin} className="w-full max-w-sm space-y-4 p-8">
-          <h1 className="text-2xl font-light text-center mb-8">Admin Login</h1>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter admin password"
-            className="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-200"
-          />
-          <button
-            type="submit"
-            className="w-full px-4 py-2.5 bg-black text-white rounded-md"
-          >
-            Login
-          </button>
-        </form>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-white">
       <div className="border-b">
         <div className="container mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 2xl:px-32">
           <div className="h-16 flex items-center justify-between">
             <h1 className="text-xl font-light">Admin Dashboard</h1>
-            <button
-              onClick={() => router.push('/admin/projects/new')}
-              className="px-6 py-2.5 bg-black text-white rounded-md"
-            >
-              Add New Project
-            </button>
+            <div className="flex space-x-4">
+              <button
+                onClick={() => router.push('/admin/projects/new')}
+                className="px-6 py-2.5 bg-black text-white rounded-md"
+              >
+                Add New Project
+              </button>
+              <button
+                onClick={handleLogout}
+                className="px-6 py-2.5 border border-gray-300 rounded-md hover:bg-gray-50"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>

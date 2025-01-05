@@ -5,7 +5,7 @@ import ImageUpload from '../../../components/ImageUpload';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import { projects } from '../../../data/projects';
-import { Project, ProjectCategory } from '../../../data/types';
+import { Project, ProjectCategory, ProjectSection, ProjectFeatured } from '../../../data/types';
 
 const emptyProject: Project = {
   id: '',
@@ -323,6 +323,249 @@ export default function EditProject() {
                         >
                           Remove
                         </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Featured Section */}
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-medium">Featured On</h3>
+                  <button
+                    onClick={() => {
+                      if (project.featured) {
+                        // Remove featured section
+                        const { featured, ...rest } = project;
+                        setProject({ ...rest, featured: undefined });
+                      } else {
+                        // Add featured section
+                        setProject({
+                          ...project,
+                          featured: {
+                            url: '',
+                            platform: '',
+                            publication: '',
+                            type: '',
+                            label: ''
+                          }
+                        });
+                      }
+                    }}
+                    className={`px-4 py-2 rounded-md text-sm ${
+                      project.featured
+                        ? 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        : 'bg-blue-500 text-white hover:bg-blue-600'
+                    }`}
+                  >
+                    {project.featured ? 'Remove Featured' : 'Add Featured'}
+                  </button>
+                </div>
+                {project.featured && (
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <label className="block">
+                        <span className="text-sm font-medium">URL</span>
+                        <input
+                          type="text"
+                          value={project.featured.url || ''}
+                          onChange={(e) => setProject({
+                            ...project,
+                            featured: { ...project.featured!, url: e.target.value }
+                          })}
+                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="text-sm font-medium">Platform</span>
+                        <input
+                          type="text"
+                          value={project.featured.platform || ''}
+                          onChange={(e) => setProject({
+                            ...project,
+                            featured: { ...project.featured!, platform: e.target.value }
+                          })}
+                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="text-sm font-medium">Publication</span>
+                        <input
+                          type="text"
+                          value={project.featured.publication || ''}
+                          onChange={(e) => setProject({
+                            ...project,
+                            featured: { ...project.featured!, publication: e.target.value }
+                          })}
+                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="text-sm font-medium">Type</span>
+                        <input
+                          type="text"
+                          value={project.featured.type || ''}
+                          onChange={(e) => setProject({
+                            ...project,
+                            featured: { ...project.featured!, type: e.target.value }
+                          })}
+                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        />
+                      </label>
+                      <label className="block">
+                        <span className="text-sm font-medium">Label</span>
+                        <input
+                          type="text"
+                          value={project.featured.label || ''}
+                          onChange={(e) => setProject({
+                            ...project,
+                            featured: { ...project.featured!, label: e.target.value }
+                          })}
+                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Project Sections */}
+              <div>
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-medium">Project Sections</h3>
+                  <button
+                    onClick={() => {
+                      const newSection: ProjectSection = {
+                        title: '',
+                        content: [],
+                        images: [],
+                        layout: 'single'
+                      };
+                      setProject({
+                        ...project,
+                        sections: [...(project.sections || []), newSection]
+                      });
+                    }}
+                    className="px-4 py-2 text-sm bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  >
+                    Add Section
+                  </button>
+                </div>
+                <div className="space-y-6">
+                  {project.sections?.map((section, index) => (
+                    <div key={index} className="border rounded-lg p-4 space-y-4">
+                      <div className="flex justify-between items-center">
+                        <h4 className="text-lg font-medium">Section {index + 1}</h4>
+                        <button
+                          onClick={() => {
+                            const newSections = project.sections?.filter((_, i) => i !== index) || [];
+                            setProject({ ...project, sections: newSections });
+                          }}
+                          className="text-red-600 hover:text-red-800"
+                        >
+                          Remove Section
+                        </button>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 gap-4">
+                        <label className="block">
+                          <span className="text-sm font-medium">Title</span>
+                          <input
+                            type="text"
+                            value={section.title || ''}
+                            onChange={(e) => {
+                              const newSections = [...(project.sections || [])];
+                              newSections[index] = { ...section, title: e.target.value };
+                              setProject({ ...project, sections: newSections });
+                            }}
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                          />
+                        </label>
+
+                        <label className="block">
+                          <span className="text-sm font-medium">Layout</span>
+                          <select
+                            value={section.layout || 'single'}
+                            onChange={(e) => {
+                              const newSections = [...(project.sections || [])];
+                              newSections[index] = { ...section, layout: e.target.value as 'single' | 'grid' | 'fullwidth' | 'sideBySide' };
+                              setProject({ ...project, sections: newSections });
+                            }}
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                          >
+                            <option value="single">Single</option>
+                            <option value="grid">Grid</option>
+                            <option value="fullwidth">Full Width</option>
+                            <option value="sideBySide">Side by Side</option>
+                          </select>
+                        </label>
+
+                        <div>
+                          <span className="text-sm font-medium">Content</span>
+                          <div className="mt-1">
+                            <ReactQuill
+                              value={Array.isArray(section.content) ? section.content.map(c => typeof c === 'string' ? c : c.content).join('\n') : ''}
+                              onChange={(content) => {
+                                const newSections = [...(project.sections || [])];
+                                newSections[index] = { ...section, content: [content] };
+                                setProject({ ...project, sections: newSections });
+                              }}
+                              modules={modules}
+                              formats={formats}
+                              className="h-48 bg-white rounded-md"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <span className="text-sm font-medium">Section Images</span>
+                          <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <ImageUpload
+                              projectId={project.id}
+                              onUpload={(url) => {
+                                const newSections = [...(project.sections || [])];
+                                const newImages = [...(section.images || []), { src: url }];
+                                newSections[index] = { ...section, images: newImages };
+                                setProject({ ...project, sections: newSections });
+                              }}
+                              className="aspect-video w-full rounded-lg border-2 border-dashed border-gray-300 p-4 hover:border-blue-500 transition-colors"
+                            />
+                            {section.images?.map((image, imageIndex) => (
+                              <div key={imageIndex} className="relative aspect-video group">
+                                <img
+                                  src={image.src}
+                                  alt={image.alt || `Section ${index + 1} image ${imageIndex + 1}`}
+                                  className="w-full h-full object-cover rounded-lg"
+                                />
+                                <button
+                                  onClick={() => {
+                                    const newSections = [...(project.sections || [])];
+                                    const newImages = section.images?.filter((_, i) => i !== imageIndex) || [];
+                                    newSections[index] = { ...section, images: newImages };
+                                    setProject({ ...project, sections: newSections });
+                                  }}
+                                  className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                >
+                                  ×
+                                </button>
+                                <input
+                                  type="text"
+                                  placeholder="Image caption"
+                                  value={image.caption || ''}
+                                  onChange={(e) => {
+                                    const newSections = [...(project.sections || [])];
+                                    const newImages = [...(section.images || [])];
+                                    newImages[imageIndex] = { ...image, caption: e.target.value };
+                                    newSections[index] = { ...section, images: newImages };
+                                    setProject({ ...project, sections: newSections });
+                                  }}
+                                  className="absolute bottom-2 left-2 right-2 px-2 py-1 bg-white/80 rounded text-sm"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}

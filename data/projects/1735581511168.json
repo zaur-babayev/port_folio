@@ -35,6 +35,10 @@
           "src": "/projects/1735581511168/sections/1735581904160.webp",
           "alt": "Feedback section of YouTube Android App in Google Play Store",
           "caption": "Feedback section of YouTube Android App in Google Play Store"
+        },
+        {
+          "src": "/projects/1735581511168/gallery/1736100685230.webp",
+          "caption": "Feedback section of YouTube Android App in Google Play Store"
         }
       ],
       "layout": "single"
@@ -86,7 +90,7 @@
     {
       "title": "Putting everything into perspective",
       "content": [
-        "<p>Of course, I understand where YouTube is coming from with this new update. They are trying to be more inclusive with these resolution options. The problem they are ideating around is essential, and I feel like they should have done this a while ago.</p><p><br></p><p><em>At least before I explained the difference between 1080 and 2k to my dad.</em></p><p><br></p><p>Maybe they are targeting not only the less tech-savvy people but the <a href=\"https://nextbillionusers.google/\" rel=\"noopener noreferrer\" target=\"_blank\">Next Billion Users</a> and people who are usually on the go and don’t care about the resolution that much. I understand that YouTube and Google have massive user data and reports that I do not have access to. However, solving a problem to include a group of users shouldn’t be coming at the cost of already existing ones.</p><p><br></p><p>This is what we are going to try to achieve in this case study. </p><p><strong>Make the YouTube video resolution interface simpler for all types of users.</strong></p><p><br></p><p><strong>Disclaimer:</strong> <em>I am sure YouTube has a great team of UX designers that work under massive pressure because of the responsibility they face with the product they work on. They might have their data and reasons to do this the way they did. This is just my little contribution from the outside.</em></p><p><br></p><p><em>This project was created by me for educational purposes and is not made, owned, or affiliated directly to YouTube. All the rights for YouTube trademark is owned by YouTube LLC.</em></p>"
+        "<p>Of course, I understand where YouTube is coming from with this new update. They are trying to be more inclusive with these resolution options. The problem they are ideating around is essential, and I feel like they should have done this a while ago.</p><p><br></p><p><em>At least before I explained the difference between 1080 and 2k to my dad.</em></p><p><br></p><p>Maybe they are targeting not only the less tech-savvy people but the <a href=\"https://nextbillionusers.google/\" rel=\"noopener noreferrer\" target=\"_blank\">Next Billion Users</a> and people who are usually on the go and don’t care about the resolution that much. I understand that YouTube and Google have massive user data and reports that I do not have access to. However, solving a problem to include a group of users shouldn’t be coming at the cost of already existing ones.</p><p><br></p><p>This is what we are going to try to achieve in this case study.</p><p><strong>Make the YouTube video resolution interface simpler for all types of users.</strong></p><p><br></p><p><strong>Disclaimer:</strong> <em>I am sure YouTube has a great team of UX designers that work under massive pressure because of the responsibility they face with the product they work on. They might have their data and reasons to do this the way they did. This is just my little contribution from the outside.</em></p><p><br></p><p><em>This project was created by me for educational purposes and is not made, owned, or affiliated directly to YouTube. All the rights for YouTube trademark is owned by YouTube LLC.</em></p>"
       ],
       "images": [],
       "layout": "single"
